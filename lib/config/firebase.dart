@@ -131,6 +131,8 @@ bool get isFirebaseConfigured {
 /// This method should be called during initialization to ensure that all necessary
 /// Firebase environment variables have been set, preventing runtime errors due to misconfiguration.
 ///
+/// NOTE: This does not validate the correctness of the values, only their presence.
+///
 /// See also:
 ///  - [isFirebaseConfigured]
 void assertFirebaseConfigured() {
