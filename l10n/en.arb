@@ -1,0 +1,21 @@
+{
+    "@@locale": "en",
+    "login_title": "Sign In",
+    "login_subtitle": "Login to your account",
+    "login_email": "Email",
+    "login_password": "Password",
+    "login_forgot_password": "I forgot my password.",
+    "login_invalid": "Invalid email or password!",
+    "login_submit": "Login",
+    "offline_title": "Offline",
+    "offline_subtitle": "This feature requires an internet connection.",
+    "offline_description": "Please connect to the internet and try again.",
+    "offline_button": "Go Back",
+    "unexpected_error_title": "Unexpected Error",
+    "unexpected_error_message": "An unexpected error occurred. If the problem persists, please contact the maintenance team.",
+    "unexpected_error_info": "When contacting the maintence team, please provide the following information:",
+    "completeProfile_title": "Complete Profile",
+    "completeProfile_subtitle": "Choose a username",
+    "completeProfile_username": "Username",
+    "completeProfile_submit": "Confirm"
+}
