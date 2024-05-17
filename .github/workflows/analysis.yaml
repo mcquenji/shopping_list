@@ -16,8 +16,9 @@ jobs:
         name: Static Analysis
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v4.1.6
+            - uses: actions/checkout@v4.1.6
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Read .fvmrc
               id: flutter_version
