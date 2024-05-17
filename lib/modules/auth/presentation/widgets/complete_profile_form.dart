@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:shopping_list/modules/auth/auth.dart';
-import 'package:shopping_list/modules/app/app.dart';
 import 'package:shopping_list/utils.dart';
 
 class CompleteProfileForm extends StatefulWidget {
@@ -48,16 +48,13 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       children: [
         Column(
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const PaddingHorizontal(20).Bottom(10),
-                child: Text(
-                  context.t.completeProfile_title,
-                  style: context.theme.textTheme.navLargeTitleTextStyle,
-                ),
+            Padding(
+              padding: PaddingHorizontal().Bottom(10),
+              child: Text(
+                context.t.completeProfile_title,
+                style: context.theme.textTheme.navLargeTitleTextStyle,
               ),
-            ),
+            ).left(),
             CupertinoFormSection.insetGrouped(
               header: t.completeProfile_subtitle.text,
               children: [
@@ -77,7 +74,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
           child: writing
               ? const CupertinoActivityIndicator()
               : t.completeProfile_submit.text,
-        ),
+        ).stretch(PaddingHorizontal()),
       ],
     );
   }
