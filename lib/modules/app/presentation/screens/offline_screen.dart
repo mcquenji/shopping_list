@@ -22,31 +22,34 @@ class OfflineScreen extends StatelessWidget {
 
           return SafeArea(
             child: Center(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          CupertinoIcons.wifi_slash,
-                          color: CupertinoColors.systemBlue,
-                          size: 100,
-                        ),
-                        50.vSpacing,
-                        context.t.offline_title.text.styled(
-                          context.theme.textTheme.navLargeTitleTextStyle,
-                        ),
-                        10.vSpacing,
-                        context.t.offline_subtitle.text,
-                      ],
+              child: Padding(
+                padding: PaddingHorizontal(),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            CupertinoIcons.wifi_exclamationmark,
+                            color: CupertinoColors.systemBlue,
+                            size: 150,
+                          ),
+                          50.vSpacing,
+                          context.t.offline_title.text.styled(
+                            context.theme.textTheme.navLargeTitleTextStyle,
+                          ),
+                          10.vSpacing,
+                          context.t.offline_subtitle.text,
+                        ],
+                      ),
                     ),
-                  ),
-                  CupertinoButton.filled(
-                    onPressed: Modular.to.pop,
-                    child: context.t.offline_button.text,
-                  ),
-                ],
+                    CupertinoButton.filled(
+                      onPressed: Modular.to.pop,
+                      child: context.t.offline_button.text,
+                    ).stretch(),
+                  ],
+                ),
               ),
             ),
           );
