@@ -15,12 +15,15 @@ jobs:
             - uses: actions/checkout@v4.1.6
 
             - name: Read .fvmrc
-              id: flutter_version
-              run: echo '::set-output name=fvmrc::$(cat .fvmrc)'
+              id: fvmrc
+              uses: ActionsTools/read-json-action@v1.0.5
+              with:
+                file_path: .fvmrc
+        
             - name: Set up Flutter
               uses: subosito/flutter-action@v2.16.0
               with:
-                flutter-version: ${{ fromJson(steps.flutter_version.outputs.fvmrc).flutter }}
+                flutter-version: ${{ steps.fvmrc.outputs.flutter }}
 
             - name: Get dependencies
               run: flutter pub get
@@ -43,6 +46,6 @@ jobs:
               with:
                 body-path: comment.txt
                 issue-number: ${{ github.event.pull_request.number }}
-                
+
             - name: Annotate results
               uses: invertase/github-action-dart-analyzer@v3
