@@ -17,13 +17,13 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4.1.6
 
             - name: Read .fvmrc
               id: flutter_version
               run: echo "::set-output name=fvmrc::$(cat .fvmrc)"
             - name: Set up Flutter
-              uses: subosito/flutter-action@v1
+              uses: subosito/flutter-action@v2.16.0
               with:
                 flutter-version: ${{ fromJson(steps.flutter_version.outputs.fvmrc).flutter }}
             - name: Get dependencies
@@ -32,7 +32,7 @@ jobs:
               continue-on-error: true # The check will fail on the 'Annotate results' step if there are any errors
               run: flutter analyze --no-pub >> analysis.txt
             - name: Setup Python
-              uses: actions/setup-python@v4.7.1
+              uses: actions/setup-python@v5.1.0
               with:
                 python-version: '3.10'
             - name: Comment results
@@ -40,9 +40,9 @@ jobs:
               #                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
               #                                        Apparently, GitHub automatically appends github.com/owner/repo/pull/ the url when rendering comments
             - name: Post comment
-              uses: peter-evans/create-or-update-comment@v3.1.0
+              uses: peter-evans/create-or-update-comment@v4.0.0
               with:
                 body-path: comment.txt
                 issue-number: ${{ github.event.pull_request.number }}
             - name: Annotate results
-              uses: invertase/github-action-dart-analyzer@v2.0.0
+              uses: invertase/github-action-dart-analyzer@v3
