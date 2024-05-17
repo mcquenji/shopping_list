@@ -14,6 +14,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4.1.6
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
             - name: Configure committer
               run: |
                 git config user.name "GitHub Actions Bot"
