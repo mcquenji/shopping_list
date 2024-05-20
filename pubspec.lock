@@ -538,7 +538,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "6a40bbe172a51a019e168929e24f882ee57ad0bd"
+      resolved-ref: "54f09c0fd16d55d48373ddef46ad719cbb2cbd0e"
       url: "https://github.com/mcquenji/mcquenji_core.git"
     source: git
     version: "1.1.0"
@@ -547,7 +547,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "706f1b81b89f993a074ddc4747842f0a81549602"
+      resolved-ref: "024b2477f9bbf0277fd3a865c797b8a3724562ea"
       url: "https://github.com/mcquenji/mcquenji_firebase.git"
     source: git
     version: "0.0.1"

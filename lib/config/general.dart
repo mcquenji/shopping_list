@@ -7,5 +7,5 @@ library confgig.general;
 /// This value can be overridden by setting the `APP_NAME` environment variable.
 const kAppName = String.fromEnvironment(
   "APP_NAME",
-  defaultValue: "McQuenji's Shopping List",
+  defaultValue: "Shopping List",
 );

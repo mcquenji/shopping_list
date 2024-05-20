@@ -1,6 +1,6 @@
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_firebase/mcquenji_firebase.dart';
-import 'package:shopping_list/modules/users/users.dart';
+import 'package:shopping_list/modules/auth/auth.dart';
 
 class UserRepository extends Repository<AsyncValue<User?>> {
   final TypedFirebaseFirestoreDataSource<User> _users;
@@ -94,17 +94,6 @@ class UserRepository extends Repository<AsyncValue<User?>> {
     });
 
     emit(guard);
-  }
-
-  Future<void> signUp(String email, String password) async {
-    // TODO: check referrer code
-
-    await _auth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-
-    _loadCurrentUser();
   }
 
   Future<void> requestPasswordReset(String email) async {
