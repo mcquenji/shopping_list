@@ -26,5 +26,23 @@
     "register_invalidEmail": "Invalid email address!",
     "register_invalidReferral": "Invalid referral code!",
     "register_invalidReferral_message": "This app is invite-only. Please ask a friend to send you an invitation or scan their QR code.",
-    "register_invalidReferral_scan": "Scan QR Code"
+    "register_invalidReferral_scan": "Scan QR Code",
+    "shoppingLists_title": "Shopping Lists",
+    "shoppingLists_empty_title": "No Shopping Lists",
+    "shoppingLists_empty_message": "Create your first one by clicking on the plus sign at the top right corner.",
+    "shoppingLists_my": "My Lists",
+    "shoppingLists_shared": "Shared with me",
+    "shoppingLists_new_title": "New Shopping List",
+    "shoppingLists_new_name": "Name",
+    "shoppingLists_new_submit": "Create",
+    "shoppingLists_items": "{count} {count, plural, =1{item}other{items}}",
+    "@shoppingLists_items": {
+        "description": "shoppingLists_items",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "1"
+            }
+        }
+    }
 }

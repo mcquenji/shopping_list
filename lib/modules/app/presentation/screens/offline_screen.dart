@@ -45,7 +45,7 @@ class OfflineScreen extends StatelessWidget {
                       ),
                     ),
                     CupertinoButton.filled(
-                      onPressed: Modular.to.pop,
+                      onPressed: () => Modular.to.navigate("/"),
                       child: context.t.offline_button.text,
                     ).stretch(),
                   ],

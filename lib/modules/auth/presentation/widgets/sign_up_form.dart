@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
-import 'package:mcquenji_firebase/mcquenji_firebase.dart';
 import 'package:shopping_list/modules/auth/auth.dart';
 import 'package:shopping_list/utils.dart';
 
@@ -96,6 +95,7 @@ class _SignUpFormState extends State<SignUpForm> {
               child: CupertinoTextFormFieldRow(
                 controller: usernameController,
                 placeholder: context.t.register_name,
+                keyboardType: TextInputType.name,
                 autofillHints: const [
                   AutofillHints.name,
                   AutofillHints.username,
@@ -121,6 +121,7 @@ class _SignUpFormState extends State<SignUpForm> {
               child: CupertinoTextFormFieldRow(
                 controller: passwordController,
                 placeholder: context.t.register_password,
+                keyboardType: TextInputType.visiblePassword,
                 obscureText: true,
                 autofillHints: const [AutofillHints.newPassword],
               ),
@@ -133,6 +134,7 @@ class _SignUpFormState extends State<SignUpForm> {
               child: CupertinoTextFormFieldRow(
                 controller: repeatPasswordController,
                 placeholder: context.t.register_repeatPassword,
+                keyboardType: TextInputType.visiblePassword,
                 obscureText: true,
                 autofillHints: const [AutofillHints.newPassword],
               ),
