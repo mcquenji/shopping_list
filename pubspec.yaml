@@ -30,6 +30,7 @@ dependencies:
   mcquenji_firebase:
     git:
       url: https://github.com/mcquenji/mcquenji_firebase.git
+  super_cupertino_navigation_bar: ^2.1.2
 
 dev_dependencies:
   build_runner: ^2.4.9

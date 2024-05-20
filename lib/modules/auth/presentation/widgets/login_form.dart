@@ -61,6 +61,7 @@ class _LoginFormState extends State<LoginForm> {
                     controller: emailController,
                     placeholder: context.t.login_email,
                     keyboardType: TextInputType.emailAddress,
+                    autofillHints: const [AutofillHints.email],
                   ),
                 ),
                 CupertinoFormRow(
@@ -69,6 +70,7 @@ class _LoginFormState extends State<LoginForm> {
                   child: CupertinoTextFormFieldRow(
                     controller: passwordController,
                     placeholder: context.t.login_password,
+                    autofillHints: const [AutofillHints.password],
                     obscureText: true,
                   ),
                 ),

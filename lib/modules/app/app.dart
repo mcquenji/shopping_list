@@ -5,6 +5,7 @@ import 'package:mcquenji_firebase/mcquenji_firebase.dart';
 import 'package:shopping_list/modules/app/guards/offline_guard.dart';
 import 'package:shopping_list/modules/app/presentation/presentation.dart';
 import 'package:shopping_list/modules/auth/auth.dart';
+import 'package:shopping_list/modules/home/home.dart';
 
 export 'presentation/presentation.dart';
 export 'guards/guards.dart';
@@ -22,13 +23,13 @@ class AppModule extends Module {
 
   @override
   void routes(r) {
-    r.child(
+    r.module(
       "/",
       customTransition: kDefaultPageTransition,
       guards: [
         FirebaseAuthGuard(redirectTo: "/auth/"),
       ],
-      child: (_) => Container(),
+      module: HomeModule(),
     );
     r.child(
       "/offline",
