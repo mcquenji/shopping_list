@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_firebase/mcquenji_firebase.dart';
+import 'package:shopping_list/modules/app/guards/offline_guard.dart';
 import 'package:shopping_list/modules/app/presentation/presentation.dart';
 import 'package:shopping_list/modules/auth/auth.dart';
 
@@ -23,13 +24,24 @@ class AppModule extends Module {
   void routes(r) {
     r.child(
       "/",
+      customTransition: kDefaultPageTransition,
+      guards: [
+        FirebaseAuthGuard(redirectTo: "/auth/"),
+      ],
       child: (_) => Container(),
     );
     r.child(
       "/offline",
-      child: (_) => OfflineScreen(from: r.args.queryParams["from"]),
+      child: (_) => OfflineScreen(
+        from: r.args.queryParams["from"],
+      ),
     );
-    r.module("/auth", module: AuthModule());
+
+    r.module(
+      "/auth",
+      customTransition: kDefaultPageTransition,
+      module: AuthModule(),
+    );
   }
 }
 

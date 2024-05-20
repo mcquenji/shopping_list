@@ -14,8 +14,17 @@
     "unexpected_error_title": "Unexpected Error",
     "unexpected_error_message": "An unexpected error occurred. If the problem persists, please contact the maintenance team.",
     "unexpected_error_info": "When contacting the maintence team, please provide the following information:",
-    "completeProfile_title": "Complete Profile",
-    "completeProfile_subtitle": "Choose a username",
-    "completeProfile_username": "Username",
-    "completeProfile_submit": "Confirm"
+    "register_title": "Register",
+    "register_subtitle": "Create a new account",
+    "register_name": "Name",
+    "register_email": "Email",
+    "register_password": "Password",
+    "register_repeatPassword": "Repeat Password",
+    "register_submit": "Register",
+    "register_already": "I already have an account.",
+    "register_invalidPassword": "Passwords do not match!",
+    "register_invalidEmail": "Invalid email address!",
+    "register_invalidReferral": "Invalid referral code!",
+    "register_invalidReferral_message": "This app is invite-only. Please ask a friend to send you an invitation or scan their QR code.",
+    "register_invalidReferral_scan": "Scan QR Code"
 }

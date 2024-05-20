@@ -2,8 +2,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_firebase/mcquenji_firebase.dart';
 import 'package:shopping_list/modules/app/app.dart';
-import 'package:shopping_list/modules/auth/presentation/presentation.dart';
-import 'package:shopping_list/modules/users/users.dart';
+import 'package:shopping_list/modules/auth/auth.dart';
+import 'package:shopping_list/modules/auth/impl/impl.dart';
 
 export 'domain/domain.dart';
 export 'presentation/presentation.dart';
@@ -12,14 +12,25 @@ class AuthModule extends Module {
   @override
   List<Module> get imports => [
         FirebaseAuthModule(),
-        UsersModule(),
+        FirebaseFirestoreModule(),
       ];
 
   @override
   void binds(Injector i) {
+    i.addLazySingleton<TypedFirebaseFirestoreDataSource<User>>(
+      UsersDataSource.new,
+    );
+    i.addLazySingleton<TypedFirebaseFirestoreDataSource<Referral>>(
+      ReferralsDataSource.new,
+    );
+
     i.addLazySingleton<UserRepository>(
       UserRepository.new,
-      config: cubitConfig(),
+      config: cubitConfig<UserRepository>(),
+    );
+    i.addLazySingleton<SignUpRepository>(
+      SignUpRepository.new,
+      config: cubitConfig<SignUpRepository>(),
     );
   }
 
@@ -30,21 +41,19 @@ class AuthModule extends Module {
   void routes(RouteManager r) {
     r.child(
       "/",
+      customTransition: kDefaultPageTransition,
+      guards: [OfflineGuard()],
       child: (_) {
         return const LoginScreen();
       },
-      customTransition: kDefaultPageTransition,
-      guards: [OfflineGuard()],
     );
 
     r.child(
-      "/complete-profile",
-      child: (_) => const CompleteProfileScreen(),
-      guards: [
-        OfflineGuard(),
-        FirebaseAuthGuard(redirectTo: "/auth"),
-      ],
-      customTransition: kDefaultPageTransition,
+      "/register",
+      guards: [OfflineGuard()],
+      child: (_) => SignUpScreen(
+        referralCode: r.args.queryParams["code"],
+      ),
     );
   }
 }

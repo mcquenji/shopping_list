@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mcquenji_firebase/mcquenji_firebase.dart';
 import 'package:shopping_list/modules/app/app.dart';
 import 'package:shopping_list/modules/auth/auth.dart';
 import 'package:shopping_list/utils.dart';
@@ -10,15 +11,20 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final repo = context.watch<UserRepository>();
+    final users = Modular.get<TypedFirebaseFirestoreDataSource<User>>();
+
+    users.readAll().then((value) {
+      if (value.isNotEmpty) return;
+
+      Modular.to.navigate('/auth/register');
+    });
 
     return CupertinoPageScaffold(
       backgroundColor: CupertinoColors.systemGroupedBackground,
       child: repo.state.when(
         data: (user) {
           if (user != null) {
-            Modular.to.navigate(
-              user.name.isEmpty ? '/auth/complete-profile' : '/',
-            );
+            Modular.to.navigate('/');
           }
 
           return const SafeArea(
