@@ -51,14 +51,6 @@ class _LoginFormState extends State<LoginForm> {
       children: [
         Column(
           children: [
-            Padding(
-              padding: PaddingHorizontal(),
-              child: Text(
-                context.t.login_title,
-                style: theme.textTheme.navLargeTitleTextStyle,
-              ),
-            ).left(),
-            10.vSpacing,
             CupertinoFormSection.insetGrouped(
               header: context.t.login_subtitle.text,
               children: [

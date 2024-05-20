@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_firebase/mcquenji_firebase.dart';
 import 'package:shopping_list/modules/app/app.dart';
 import 'package:shopping_list/modules/auth/auth.dart';
@@ -21,6 +22,9 @@ class LoginScreen extends StatelessWidget {
 
     return CupertinoPageScaffold(
       backgroundColor: CupertinoColors.systemGroupedBackground,
+      navigationBar: CupertinoNavigationBar(
+        leading: context.t.login_title.text,
+      ),
       child: repo.state.when(
         data: (user) {
           if (user != null) {
