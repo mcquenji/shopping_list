@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:shopping_list/modules/home/home.dart';
 import 'package:shopping_list/utils.dart';
 import 'package:super_cupertino_navigation_bar/super_cupertino_navigation_bar.dart';
@@ -49,28 +50,36 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         appBar: SuperAppBar(
           backgroundColor: CupertinoDynamicColor.resolve(
-            isCollapsed
+            isCollapsed || searchController.text.isNotEmpty
                 ? CupertinoColors.systemBackground
                 : CupertinoColors.systemGroupedBackground,
             context,
           ),
+          actions: isCollapsed
+              ? CupertinoButton(
+                  onPressed: addShoppingList,
+                  child: const Icon(CupertinoIcons.plus),
+                )
+              : null,
           largeTitle: SuperLargeTitle(
+            textStyle: context.theme.textTheme.navLargeTitleTextStyle,
             largeTitle: t.shoppingLists_title,
-          ),
-          actions: CupertinoButton(
-            onPressed: addShoppingList,
-            child: const Icon(CupertinoIcons.add),
+            actions: [
+              CupertinoButton(
+                onPressed: addShoppingList,
+                child: t.shoppingLists_new_btn.text,
+              ),
+            ],
           ),
           searchBar: SuperSearchBar(
+            resultColor: CupertinoDynamicColor.resolve(
+              CupertinoColors.systemGroupedBackground,
+              context,
+            ),
+            textStyle: context.theme.textTheme.textStyle,
             searchController: searchController,
-            searchResult: Container(
-              color: CupertinoDynamicColor.resolve(
-                CupertinoColors.systemGroupedBackground,
-                context,
-              ),
-              child: ShoppingLists(
-                searchQuery: searchController.text,
-              ),
+            searchResult: ShoppingLists(
+              searchQuery: searchController.text,
             ),
           ),
         ),

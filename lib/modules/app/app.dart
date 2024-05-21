@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_firebase/mcquenji_firebase.dart';
-import 'package:shopping_list/modules/app/guards/offline_guard.dart';
 import 'package:shopping_list/modules/app/presentation/presentation.dart';
 import 'package:shopping_list/modules/auth/auth.dart';
 import 'package:shopping_list/modules/home/home.dart';
