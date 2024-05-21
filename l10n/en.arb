@@ -32,6 +32,7 @@
     "shoppingLists_empty_message": "Create your first one by clicking on the plus sign at the top right corner.",
     "shoppingLists_my": "My Lists",
     "shoppingLists_shared": "Shared with me",
+    "shoppingLists_new_btn": "New list",
     "shoppingLists_new_title": "New Shopping List",
     "shoppingLists_new_name": "Name",
     "shoppingLists_new_submit": "Create",

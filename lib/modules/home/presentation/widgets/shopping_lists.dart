@@ -43,16 +43,20 @@ class ShoppingLists extends StatelessWidget {
                 )
                 .toList();
 
-            if (results.isEmpty) return Container();
-
             return CupertinoListSection(
               children: [
                 for (final list in results)
                   CupertinoListTile(
+                    backgroundColor: CupertinoDynamicColor.resolve(
+                      CupertinoColors.systemGroupedBackground,
+                      context,
+                    ),
                     key: ValueKey(list.id),
                     title: list.name.text,
                     trailing: const CupertinoListTileChevron(),
-                    onTap: () {},
+                    onTap: () {
+                      Modular.to.pushNamed("/${list.id}");
+                    },
                     additionalInfo: context.t
                         .shoppingLists_items(
                           list.items.where((e) => !e.checked).length,
@@ -65,11 +69,13 @@ class ShoppingLists extends StatelessWidget {
 
           return Column(
             children: [
-              for (final list in data.values)
+              for (final list in data.values) ...[
                 ShoppingListTile(
                   key: ValueKey(list.id),
                   list: list,
                 ),
+                10.vSpacing,
+              ],
             ],
           );
         },

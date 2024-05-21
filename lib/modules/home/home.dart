@@ -32,5 +32,12 @@ class HomeModule extends Module {
       "/",
       child: (_) => const HomeScreen(),
     );
+
+    r.child(
+      "/:id",
+      child: (_) => ShoppingListItemsScreen(
+        id: r.args.params["id"],
+      ),
+    );
   }
 }
