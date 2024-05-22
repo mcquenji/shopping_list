@@ -47,38 +47,29 @@ class _CreateShoppingListFormState extends State<CreateShoppingListForm> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      backgroundColor: CupertinoDynamicColor.resolve(
-        CupertinoColors.systemGroupedBackground,
-        context,
-      ),
-      navigationBar: CupertinoNavigationBar(
-        middle: t.shoppingLists_new_title.text,
-      ),
-      child: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CupertinoFormSection.insetGrouped(
-              header: "".text,
-              children: [
-                CupertinoFormRow(
-                  prefix: const Icon(CupertinoIcons.square_list_fill),
-                  child: CupertinoTextFormFieldRow(
-                    controller: nameController,
-                    placeholder: t.shoppingLists_new_name,
-                  ),
+    return SafeArea(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CupertinoFormSection.insetGrouped(
+            header: "".text,
+            children: [
+              CupertinoFormRow(
+                prefix: const Icon(CupertinoIcons.square_list_fill),
+                child: CupertinoTextFormFieldRow(
+                  controller: nameController,
+                  placeholder: t.shoppingLists_new_name,
                 ),
-              ],
-            ),
-            CupertinoButton.filled(
-              onPressed: canSubmit && !submitting ? submit : null,
-              child: submitting
-                  ? const CupertinoActivityIndicator()
-                  : t.shoppingLists_new_submit.text,
-            ).stretch(PaddingHorizontal()),
-          ],
-        ),
+              ),
+            ],
+          ),
+          CupertinoButton.filled(
+            onPressed: canSubmit && !submitting ? submit : null,
+            child: submitting
+                ? const CupertinoActivityIndicator()
+                : t.shoppingLists_new_submit.text,
+          ).stretch(PaddingHorizontal()),
+        ],
       ),
     );
   }

@@ -24,7 +24,6 @@ mixin _$ShoppingList {
   String get name => throw _privateConstructorUsedError;
   String get owner => throw _privateConstructorUsedError;
   List<String> get members => throw _privateConstructorUsedError;
-  List<ShoppingListItem> get items => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,12 +37,7 @@ abstract class $ShoppingListCopyWith<$Res> {
           ShoppingList value, $Res Function(ShoppingList) then) =
       _$ShoppingListCopyWithImpl<$Res, ShoppingList>;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String owner,
-      List<String> members,
-      List<ShoppingListItem> items});
+  $Res call({String id, String name, String owner, List<String> members});
 }
 
 /// @nodoc
@@ -63,7 +57,6 @@ class _$ShoppingListCopyWithImpl<$Res, $Val extends ShoppingList>
     Object? name = null,
     Object? owner = null,
     Object? members = null,
-    Object? items = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -82,10 +75,6 @@ class _$ShoppingListCopyWithImpl<$Res, $Val extends ShoppingList>
           ? _value.members
           : members // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      items: null == items
-          ? _value.items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<ShoppingListItem>,
     ) as $Val);
   }
 }
@@ -98,12 +87,7 @@ abstract class _$$ShoppingListImplCopyWith<$Res>
       __$$ShoppingListImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      String owner,
-      List<String> members,
-      List<ShoppingListItem> items});
+  $Res call({String id, String name, String owner, List<String> members});
 }
 
 /// @nodoc
@@ -121,7 +105,6 @@ class __$$ShoppingListImplCopyWithImpl<$Res>
     Object? name = null,
     Object? owner = null,
     Object? members = null,
-    Object? items = null,
   }) {
     return _then(_$ShoppingListImpl(
       id: null == id
@@ -140,10 +123,6 @@ class __$$ShoppingListImplCopyWithImpl<$Res>
           ? _value._members
           : members // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      items: null == items
-          ? _value._items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<ShoppingListItem>,
     ));
   }
 }
@@ -155,10 +134,8 @@ class _$ShoppingListImpl implements _ShoppingList {
       {required this.id,
       required this.name,
       required this.owner,
-      final List<String> members = const [],
-      final List<ShoppingListItem> items = const []})
-      : _members = members,
-        _items = items;
+      final List<String> members = const []})
+      : _members = members;
 
   factory _$ShoppingListImpl.fromJson(Map<String, dynamic> json) =>
       _$$ShoppingListImplFromJson(json);
@@ -178,18 +155,9 @@ class _$ShoppingListImpl implements _ShoppingList {
     return EqualUnmodifiableListView(_members);
   }
 
-  final List<ShoppingListItem> _items;
-  @override
-  @JsonKey()
-  List<ShoppingListItem> get items {
-    if (_items is EqualUnmodifiableListView) return _items;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_items);
-  }
-
   @override
   String toString() {
-    return 'ShoppingList(id: $id, name: $name, owner: $owner, members: $members, items: $items)';
+    return 'ShoppingList(id: $id, name: $name, owner: $owner, members: $members)';
   }
 
   @override
@@ -200,19 +168,13 @@ class _$ShoppingListImpl implements _ShoppingList {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.owner, owner) || other.owner == owner) &&
-            const DeepCollectionEquality().equals(other._members, _members) &&
-            const DeepCollectionEquality().equals(other._items, _items));
+            const DeepCollectionEquality().equals(other._members, _members));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      owner,
-      const DeepCollectionEquality().hash(_members),
-      const DeepCollectionEquality().hash(_items));
+  int get hashCode => Object.hash(runtimeType, id, name, owner,
+      const DeepCollectionEquality().hash(_members));
 
   @JsonKey(ignore: true)
   @override
@@ -233,8 +195,7 @@ abstract class _ShoppingList implements ShoppingList {
       {required final String id,
       required final String name,
       required final String owner,
-      final List<String> members,
-      final List<ShoppingListItem> items}) = _$ShoppingListImpl;
+      final List<String> members}) = _$ShoppingListImpl;
 
   factory _ShoppingList.fromJson(Map<String, dynamic> json) =
       _$ShoppingListImpl.fromJson;
@@ -247,8 +208,6 @@ abstract class _ShoppingList implements ShoppingList {
   String get owner;
   @override
   List<String> get members;
-  @override
-  List<ShoppingListItem> get items;
   @override
   @JsonKey(ignore: true)
   _$$ShoppingListImplCopyWith<_$ShoppingListImpl> get copyWith =>

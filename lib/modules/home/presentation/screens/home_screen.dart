@@ -1,5 +1,5 @@
+import 'package:cupertino_modal_sheet/cupertino_modal_sheet.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:shopping_list/modules/auth/auth.dart';
@@ -29,10 +29,17 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isCollapsed = false;
 
   void addShoppingList() {
-    Modular.to.push(
-      CupertinoPageRoute(
-        builder: (_) => const CreateShoppingListForm(),
-        fullscreenDialog: true,
+    showCupertinoModalSheet(
+      context: context,
+      firstTransition: CupertinoModalSheetRouteTransition.scale,
+      fullscreenDialog: true,
+      builder: (_) => CupertinoPageScaffold(
+        backgroundColor:
+            CupertinoColors.systemGroupedBackground.resolveFrom(context),
+        navigationBar: CupertinoNavigationBar(
+          middle: t.shoppingLists_new_title.text,
+        ),
+        child: const CreateShoppingListForm(),
       ),
     );
   }
@@ -74,10 +81,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      backgroundColor: CupertinoDynamicColor.resolve(
-        CupertinoColors.systemGroupedBackground,
-        context,
-      ),
+      backgroundColor:
+          CupertinoColors.systemGroupedBackground.resolveFrom(context),
       child: SuperScaffold(
         onCollapsed: (collapsed) {
           setState(() {
@@ -87,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: SuperAppBar(
           backgroundColor: CupertinoDynamicColor.resolve(
             isCollapsed || searchController.text.isNotEmpty
-                ? CupertinoColors.systemBackground
+                ? CupertinoColors.secondarySystemGroupedBackground
                 : CupertinoColors.systemGroupedBackground,
             context,
           ),
@@ -108,11 +113,11 @@ class _HomeScreenState extends State<HomeScreen> {
             largeTitle: t.shoppingLists_title,
             actions: [
               CupertinoButton(
+                onPressed: logout,
                 child: Icon(
                   CupertinoIcons.profile_circled,
                   size: theme.textTheme.navLargeTitleTextStyle.fontSize,
                 ),
-                onPressed: logout,
               )
             ],
           ),

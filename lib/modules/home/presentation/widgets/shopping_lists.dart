@@ -38,41 +38,20 @@ class ShoppingLists extends StatelessWidget {
             );
           }
 
-          if (searchQuery != null && searchQuery!.isNotEmpty) {
-            final results = data.values
-                .where(
-                  (e) =>
-                      e.name.toLowerCase().contains(searchQuery!.toLowerCase()),
-                )
-                .toList();
-
-            return CupertinoListSection(
-              children: [
-                for (final list in results)
-                  CupertinoListTile(
-                    backgroundColor: CupertinoDynamicColor.resolve(
-                      CupertinoColors.systemGroupedBackground,
-                      context,
-                    ),
-                    key: ValueKey(list.id),
-                    title: list.name.text,
-                    trailing: const CupertinoListTileChevron(),
-                    onTap: () {
-                      Modular.to.pushNamed("/${list.id}");
-                    },
-                    additionalInfo: context.t
-                        .shoppingLists_items(
-                          list.items.where((e) => !e.checked).length,
-                        )
-                        .text,
-                  ),
-              ],
-            );
-          }
+          final results = searchQuery == null
+              ? data.values
+              : data.values
+                  .where(
+                    (e) => e.name
+                        .toLowerCase()
+                        .contains(searchQuery!.toLowerCase()),
+                  )
+                  .toList();
 
           return Column(
             children: [
-              for (final list in data.values) ...[
+              20.vSpacing,
+              for (final list in results) ...[
                 ShoppingListTile(
                   key: ValueKey(list.id),
                   list: list,
