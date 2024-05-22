@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:shopping_list/modules/app/app.dart';
 import 'package:shopping_list/modules/home/home.dart';
 import 'package:shopping_list/utils.dart';

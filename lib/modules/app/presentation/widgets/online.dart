@@ -3,10 +3,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:shopping_list/utils.dart';
 
-class OfflineScreen extends StatelessWidget {
-  const OfflineScreen({super.key, required this.from});
+class Online extends StatelessWidget {
+  const Online({super.key, required this.builder});
 
-  final String? from;
+  final WidgetBuilder builder;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +16,8 @@ class OfflineScreen extends StatelessWidget {
       child: StreamBuilder<bool>(
         stream: service.onConnectivityChanged,
         builder: (context, snapshot) {
-          if (from != null && (snapshot.data ?? false)) {
-            Modular.to.navigate(from!);
+          if (service.isConnected) {
+            return builder(context);
           }
 
           return SafeArea(
