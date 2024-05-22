@@ -46,7 +46,7 @@ class Online extends StatelessWidget {
                     ),
                     CupertinoButton.filled(
                       onPressed: () => Modular.to.navigate("/"),
-                      child: context.t.offline_button.text,
+                      child: context.t.global_back.text,
                     ).stretch(),
                   ],
                 ),

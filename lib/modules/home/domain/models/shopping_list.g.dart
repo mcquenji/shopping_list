@@ -15,10 +15,6 @@ _$ShoppingListImpl _$$ShoppingListImplFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           const [],
-      items: (json['items'] as List<dynamic>?)
-              ?.map((e) => ShoppingListItem.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
     );
 
 Map<String, dynamic> _$$ShoppingListImplToJson(_$ShoppingListImpl instance) =>
@@ -27,5 +23,4 @@ Map<String, dynamic> _$$ShoppingListImplToJson(_$ShoppingListImpl instance) =>
       'name': instance.name,
       'owner': instance.owner,
       'members': instance.members,
-      'items': instance.items,
     };

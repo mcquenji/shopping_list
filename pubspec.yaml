@@ -10,7 +10,9 @@ environment:
 
 dependencies:
   cloud_firestore: ^4.17.3
+  collection: ^1.18.0
   cupertino_icons: ^1.0.6
+  cupertino_modal_sheet: ^1.1.0
   device_preview: ^1.1.0
   firebase_auth: ^4.19.5
   firebase_core: ^2.31.0

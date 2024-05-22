@@ -10,7 +10,6 @@
     "offline_title": "Offline",
     "offline_subtitle": "This feature requires an internet connection.",
     "offline_description": "Please connect to the internet and try again.",
-    "offline_button": "Go Back",
     "unexpected_error_title": "Unexpected Error",
     "unexpected_error_message": "An unexpected error occurred. If the problem persists, please contact the maintenance team.",
     "unexpected_error_info": "When contacting the maintence team, please provide the following information:",
@@ -59,5 +58,13 @@
         }
     },
     "shoppingLists_profile_invite": "Invite a friend",
-    "shoppingLists_profile_logout": "Logout"
+    "shoppingLists_profile_logout": "Logout",
+    "shoppingListItems_add": "Add",
+    "shoppingListItems_notFound": "Oops! We couldn't find that list.",
+    "shoppingListItems_notFound_message": "This shopping list doesn't exist or you don't have permission to view it.",
+    "global_yes": "Yes",
+    "global_no": "No",
+    "global_cancel": "Cancel",
+    "global_goBack": "Go Back",
+    "global_back": "Back"
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_firebase/mcquenji_firebase.dart';
@@ -16,64 +15,13 @@ class ShoppingListTile extends StatefulWidget {
 }
 
 class _ShoppingListTileState extends State<ShoppingListTile> {
-  void deleteList() {
-    // showCupertinoDialog(
-    //   context: context,
-    //   builder: (_) => CupertinoAlertDialog(
-    //     title: "Delete list".text,
-    //     content: "Are you sure you want to delete '${widget.list.name}'?".text,
-    //     actions: [
-    //       CupertinoDialogAction(
-    //         child: "Cancel".text,
-    //         onPressed: () {
-    //           Navigator.of(context).pop();
-    //         },
-    //       ),
-    //       CupertinoDialogAction(
-    //         child: "Delete".text,
-    //         isDestructiveAction: true,
-    //         onPressed: () {
-    //           context
-    //               .read<ShoppingListsRepository>()
-    //               .deleteList(widget.list.id);
-    //           Navigator.of(context).pop();
-    //         },
-    //       ),
-    //     ],
-    //   ),
-    // );
-
-    context.read<ShoppingListsRepository>().deleteList(widget.list.id);
+  void deleteList() async {
+    await context.read<ShoppingListsRepository>().deleteList(widget.list.id);
     Modular.to.pop();
   }
 
-  void leaveList() {
-    // showCupertinoDialog(
-    //   context: context,
-    //   builder: (_) => CupertinoAlertDialog(
-    //     title: "Leave list".text,
-    //     content: "Are you sure you want to leave '${widget.list.name}'?".text,
-    //     actions: [
-    //       CupertinoDialogAction(
-    //         child: "Cancel".text,
-    //         onPressed: () {
-    //           Navigator.of(context).pop();
-    //         },
-    //       ),
-    //       CupertinoDialogAction(
-    //         child: "Leave".text,
-    //         isDestructiveAction: true,
-    //         onPressed: () {
-    //           context.read<ShoppingListsRepository>().leaveList(widget.list.id);
-    //           Navigator.of(context).pop();
-    //         },
-    //       ),
-    //     ],
-    //   ),
-    // );
-
-    context.read<ShoppingListsRepository>().leaveList(widget.list.id);
-
+  void leaveList() async {
+    await context.read<ShoppingListsRepository>().leaveList(widget.list.id);
     Modular.to.pop();
   }
 
@@ -118,12 +66,8 @@ class _ShoppingListTileState extends State<ShoppingListTile> {
             borderRadius: const BorderRadius.all(
               Radius.circular(15),
             ),
-            color: animation
-                .drive(ColorTween(
-                  begin: CupertinoColors.systemFill,
-                  end: CupertinoColors.systemBackground,
-                ))
-                .value,
+            color: CupertinoColors.secondarySystemGroupedBackground
+                .resolveFrom(context),
           ),
           child: CupertinoListTile(
             key: ValueKey(widget.list.id),
@@ -139,11 +83,7 @@ class _ShoppingListTileState extends State<ShoppingListTile> {
                   ? CupertinoIcons.person_2_fill
                   : CupertinoIcons.person_fill,
             ),
-            additionalInfo: context.t
-                .shoppingLists_items(
-                  widget.list.items.where((e) => !e.checked).length,
-                )
-                .text,
+            additionalInfo: ShoppingListItemCount(widget.list.id),
           ),
         ),
       ),

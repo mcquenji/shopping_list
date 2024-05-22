@@ -54,9 +54,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Modular.navigatorDelegate;
     return CupertinoApp.router(
-      // theme: CupertinoThemeData(brightness: Brightness.dark),
       title: kAppName,
       locale: AppLocalizations.supportedLocales.first,
       localizationsDelegates: AppLocalizations.localizationsDelegates,

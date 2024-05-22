@@ -30,11 +30,9 @@ service cloud.firestore {
 
     match /lists/{id} {  
       function isOwnerOrMember(userId) {
-        return resource.data.owner == userId || resource.data.members.hasAny([userId]);
-      }
+        let doc = get(/databases/$(database)/documents/lists/$(id));
 
-      function isMember(userId) {
-        return resource.data.members.hasAny([userId]);
+        return doc.data.owner == userId || doc.data.members.hasAny([userId]);
       }
 
       function isLeaving(uid) {
@@ -45,11 +43,23 @@ service cloud.firestore {
 
       allow read: if request.auth != null && isOwnerOrMember(request.auth.uid);
 
-      allow update: if request.auth != null && (request.auth.uid == resource.data.owner || (request.resource.data.keys().hasOnly(['items']) && isMember(request.auth.uid))) || isLeaving(request.auth.uid);
+      allow update: if request.auth != null && (request.auth.uid == resource.data.owner  || isLeaving(request.auth.uid));
 
-      allow delete: if request.auth != null && isOwnerOrMember(request.auth.uid);
+      allow delete: if request.auth != null && request.auth.uid == resource.data.owner ;
 
       allow create: if request.auth != null && request.resource.data.owner == request.auth.uid && request.resource.id == id;
+
+      match /items/{item} {
+        allow read: if request.auth != null && isOwnerOrMember(request.auth.uid);
+
+        allow create: if request.auth != null && isOwnerOrMember(request.auth.uid) && request.resource.data.id == item;
+
+        allow update: if request.auth != null && isOwnerOrMember(request.auth.uid);
+
+        allow delete: if request.auth != null && isOwnerOrMember(request.auth.uid); 
+      }
     }
+
+
   }
 }
