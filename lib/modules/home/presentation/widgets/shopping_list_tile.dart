@@ -81,7 +81,7 @@ class _ShoppingListTileState extends State<ShoppingListTile> {
   Widget build(BuildContext context) {
     final auth = context.read<FirebaseAuthService>();
 
-    return CupertinoContextMenu(
+    return CupertinoContextMenu.builder(
       enableHapticFeedback: true,
       actions: [
         if (widget.list.owner == auth.currentUser?.uid)
@@ -105,7 +105,7 @@ class _ShoppingListTileState extends State<ShoppingListTile> {
             child: t.shoppingLists_options_leave.text,
           ),
       ],
-      child: GestureDetector(
+      builder: (context, animation) => GestureDetector(
         onTap: () {
           Modular.to.pushNamed("/${widget.list.id}");
         },
@@ -113,18 +113,26 @@ class _ShoppingListTileState extends State<ShoppingListTile> {
           padding: PaddingVertical(10),
           width:
               context.screen.width - DeclarativeEdgeInsets.defaultPadding * 2,
+          height: 64,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(
               Radius.circular(15),
             ),
-            color: CupertinoDynamicColor.resolve(
-              CupertinoColors.systemFill,
-              context,
-            ),
+            color: animation
+                .drive(ColorTween(
+                  begin: CupertinoColors.systemFill,
+                  end: CupertinoColors.systemBackground,
+                ))
+                .value,
           ),
           child: CupertinoListTile(
             key: ValueKey(widget.list.id),
-            title: widget.list.name.text,
+            title: Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: widget.list.name.text.left,
+              ),
+            ),
             trailing: const CupertinoListTileChevron(),
             leading: Icon(
               widget.list.members.isNotEmpty
