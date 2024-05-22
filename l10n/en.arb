@@ -29,10 +29,11 @@
     "register_invalidReferral_scan": "Scan QR Code",
     "shoppingLists_title": "Shopping Lists",
     "shoppingLists_empty_title": "No Shopping Lists",
-    "shoppingLists_empty_message": "Create your first one by clicking on the plus sign at the top right corner.",
-    "shoppingLists_my": "My Lists",
-    "shoppingLists_shared": "Shared with me",
-    "shoppingLists_new_btn": "New list",
+    "shoppingLists_empty_message": "You don't have any shopping lists yet. Add one to get started.",
+    "shoppingLists_options_share": "Share",
+    "shoppingLists_options_delete": "Delete",
+    "shoppingLists_options_leave": "Leave",
+    "shoppingLists_new_btn": "Add",
     "shoppingLists_new_title": "New Shopping List",
     "shoppingLists_new_name": "Name",
     "shoppingLists_new_submit": "Create",
@@ -45,5 +46,18 @@
                 "example": "1"
             }
         }
-    }
+    },
+    "shoppingLists_profile_title": "Manage Account",
+    "shoppingLists_profile_message": "You are logged in as {name}.",
+    "@shoppingLists_profile_message": {
+        "description": "Shopping lists _logout_title",
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "John"
+            }
+        }
+    },
+    "shoppingLists_profile_invite": "Invite a friend",
+    "shoppingLists_profile_logout": "Logout"
 }
