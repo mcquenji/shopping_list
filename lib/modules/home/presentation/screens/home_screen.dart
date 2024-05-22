@@ -2,6 +2,7 @@ import 'package:cupertino_modal_sheet/cupertino_modal_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
+import 'package:shopping_list/modules/app/app.dart';
 import 'package:shopping_list/modules/auth/auth.dart';
 import 'package:shopping_list/modules/home/home.dart';
 import 'package:shopping_list/utils.dart';
@@ -80,60 +81,67 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final lists = context.watch<ShoppingListsRepository>();
+
     return CupertinoPageScaffold(
       backgroundColor:
           CupertinoColors.systemGroupedBackground.resolveFrom(context),
-      child: SuperScaffold(
-        onCollapsed: (collapsed) {
-          setState(() {
-            isCollapsed = collapsed;
-          });
-        },
-        appBar: SuperAppBar(
-          backgroundColor: CupertinoDynamicColor.resolve(
-            isCollapsed || searchController.text.isNotEmpty
-                ? CupertinoColors.secondarySystemGroupedBackground
-                : CupertinoColors.systemGroupedBackground,
-            context,
-          ),
-          leading: isCollapsed
-              ? null
-              : CupertinoButton(
-                  onPressed: addShoppingList,
-                  child: t.shoppingLists_new_btn.text,
-                ),
-          actions: !isCollapsed
-              ? null
-              : CupertinoButton(
-                  onPressed: addShoppingList,
-                  child: t.shoppingLists_new_btn.text,
-                ),
-          largeTitle: SuperLargeTitle(
-            textStyle: context.theme.textTheme.navLargeTitleTextStyle,
-            largeTitle: t.shoppingLists_title,
-            actions: [
-              CupertinoButton(
-                onPressed: logout,
-                child: Icon(
-                  CupertinoIcons.profile_circled,
-                  size: theme.textTheme.navLargeTitleTextStyle.fontSize,
-                ),
-              )
-            ],
-          ),
-          searchBar: SuperSearchBar(
-            resultColor: CupertinoDynamicColor.resolve(
-              CupertinoColors.systemGroupedBackground,
+      child: lists.state.when(
+        data: (lists) => SuperScaffold(
+          onCollapsed: (collapsed) {
+            setState(() {
+              isCollapsed = collapsed;
+            });
+          },
+          appBar: SuperAppBar(
+            backgroundColor: CupertinoDynamicColor.resolve(
+              isCollapsed || searchController.text.isNotEmpty
+                  ? CupertinoColors.secondarySystemGroupedBackground
+                  : CupertinoColors.systemGroupedBackground,
               context,
             ),
-            textStyle: context.theme.textTheme.textStyle,
-            searchController: searchController,
-            searchResult: ShoppingLists(
-              searchQuery: searchController.text,
+            leading: isCollapsed
+                ? null
+                : CupertinoButton(
+                    onPressed: addShoppingList,
+                    child: t.shoppingLists_new_btn.text,
+                  ),
+            actions: !isCollapsed
+                ? null
+                : CupertinoButton(
+                    onPressed: addShoppingList,
+                    child: t.shoppingLists_new_btn.text,
+                  ),
+            largeTitle: SuperLargeTitle(
+              textStyle: context.theme.textTheme.navLargeTitleTextStyle,
+              largeTitle: t.shoppingLists_title,
+              actions: [
+                CupertinoButton(
+                  onPressed: logout,
+                  child: Icon(
+                    CupertinoIcons.profile_circled,
+                    size: theme.textTheme.navLargeTitleTextStyle.fontSize,
+                  ),
+                )
+              ],
+            ),
+            searchBar: SuperSearchBar(
+              resultColor: CupertinoDynamicColor.resolve(
+                CupertinoColors.systemGroupedBackground,
+                context,
+              ),
+              textStyle: context.theme.textTheme.textStyle,
+              searchController: searchController,
+              searchResult: ShoppingLists(
+                lists,
+                searchQuery: searchController.text,
+              ),
             ),
           ),
+          body: ShoppingLists(lists),
         ),
-        body: const SingleChildScrollView(child: ShoppingLists()),
+        loading: () => const CupertinoActivityIndicator().large(context),
+        error: UnexpectedErrorWidget.handler,
       ),
     );
   }

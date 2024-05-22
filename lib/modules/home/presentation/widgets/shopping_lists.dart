@@ -1,24 +1,21 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
-import 'package:shopping_list/modules/app/app.dart';
 import 'package:shopping_list/modules/home/home.dart';
 import 'package:shopping_list/utils.dart';
 
 class ShoppingLists extends StatelessWidget {
-  const ShoppingLists({super.key, this.searchQuery});
+  const ShoppingLists(this.lists, {super.key, this.searchQuery});
 
+  final Map<String, ShoppingList> lists;
   final String? searchQuery;
 
   @override
   Widget build(BuildContext context) {
-    final lists = context.watch<ShoppingListsRepository>();
-
     return Padding(
       padding: PaddingHorizontal(),
-      child: lists.state.when(
-        data: (data) {
-          if (data.isEmpty) {
+      child: Builder(
+        builder: (context) {
+          if (lists.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -39,8 +36,8 @@ class ShoppingLists extends StatelessWidget {
           }
 
           final results = searchQuery == null
-              ? data.values
-              : data.values
+              ? lists.values.toList()
+              : lists.values
                   .where(
                     (e) => e.name
                         .toLowerCase()
@@ -48,23 +45,19 @@ class ShoppingLists extends StatelessWidget {
                   )
                   .toList();
 
-          return Column(
-            children: [
-              20.vSpacing,
-              for (final list in results) ...[
-                ShoppingListTile(
-                  key: ValueKey(list.id),
-                  list: list,
-                ),
-                10.vSpacing,
-              ],
-            ],
+          return ListView.separated(
+            separatorBuilder: (context, index) => 10.vSpacing,
+            itemBuilder: (context, index) {
+              final list = results[index];
+
+              return ShoppingListTile(
+                key: ValueKey(list.id),
+                list: list,
+              );
+            },
+            itemCount: results.length,
           );
         },
-        loading: () => Center(
-          child: const CupertinoActivityIndicator().large(context),
-        ),
-        error: UnexpectedErrorWidget.handler,
       ),
     );
   }
