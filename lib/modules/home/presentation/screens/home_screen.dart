@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:shopping_list/modules/home/home.dart';
@@ -83,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        body: const ShoppingLists(),
+        body: SingleChildScrollView(child: const ShoppingLists()),
       ),
     );
   }

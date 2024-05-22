@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_firebase/mcquenji_firebase.dart';
-import 'package:shopping_list/modules/app/presentation/presentation.dart';
 import 'package:shopping_list/modules/auth/auth.dart';
 import 'package:shopping_list/modules/home/home.dart';
 
 export 'presentation/presentation.dart';
-export 'guards/guards.dart';
 
 class AppModule extends Module {
   @override
@@ -29,12 +27,6 @@ class AppModule extends Module {
         FirebaseAuthGuard(redirectTo: "/auth/"),
       ],
       module: HomeModule(),
-    );
-    r.child(
-      "/offline",
-      child: (_) => OfflineScreen(
-        from: r.args.queryParams["from"],
-      ),
     );
 
     r.module(

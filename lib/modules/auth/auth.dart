@@ -1,3 +1,4 @@
+import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_firebase/mcquenji_firebase.dart';
@@ -42,17 +43,17 @@ class AuthModule extends Module {
     r.child(
       "/",
       customTransition: kDefaultPageTransition,
-      guards: [OfflineGuard()],
-      child: (_) {
-        return const LoginScreen();
-      },
+      child: (_) => Online(
+        builder: (_) => const LoginScreen(),
+      ),
     );
 
     r.child(
       "/register",
-      guards: [OfflineGuard()],
-      child: (_) => SignUpScreen(
-        referralCode: r.args.queryParams["code"],
+      child: (_) => Online(
+        builder: (context) => SignUpScreen(
+          referralCode: r.args.queryParams["code"],
+        ),
       ),
     );
   }
