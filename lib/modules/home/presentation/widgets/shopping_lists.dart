@@ -19,19 +19,22 @@ class ShoppingLists extends StatelessWidget {
       child: lists.state.when(
         data: (data) {
           if (data.isEmpty) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  CupertinoIcons.square_list_fill,
-                  size: 100,
-                ),
-                10.vSpacing,
-                context.t.shoppingLists_empty_title.text.centered.styled(
-                  context.theme.textTheme.navLargeTitleTextStyle,
-                ),
-                context.t.shoppingLists_empty_message.text.centered,
-              ],
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    CupertinoIcons.nosign,
+                    color: CupertinoColors.systemGrey,
+                    size: 50,
+                  ),
+                  10.vSpacing,
+                  context.t.shoppingLists_empty_title.text.centered.styled(
+                    context.theme.textTheme.navTitleTextStyle,
+                  ),
+                  context.t.shoppingLists_empty_message.text.centered,
+                ],
+              ),
             );
           }
 

@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_firebase/mcquenji_firebase.dart';
+import 'package:shopping_list/modules/auth/auth.dart';
 import 'package:shopping_list/modules/home/home.dart';
 import 'package:shopping_list/modules/home/impl/shopping_lists_datasource.dart';
 
@@ -12,6 +13,7 @@ class HomeModule extends Module {
   List<Module> get imports => [
         FirebaseFirestoreModule(),
         FirebaseAuthModule(),
+        AuthModule(),
       ];
 
   @override
