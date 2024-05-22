@@ -21,7 +21,7 @@ class ShoppingListItemCount extends StatelessWidget {
     return FutureBuilder(
       future: showAll
           ? items.getItemsCount(listId)
-          : items.getCheckedItemsCount(listId),
+          : items.getUncheckedItemsCount(listId),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const CupertinoActivityIndicator();

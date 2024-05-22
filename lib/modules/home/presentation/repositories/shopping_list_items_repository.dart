@@ -8,6 +8,7 @@ import 'package:shopping_list/modules/home/home.dart';
 class ShoppingListItemsRepository
     extends Repository<AsyncValue<Map<String, ShoppingListItem>>> {
   static const String itemsSubcollection = "items";
+  static const Duration maxCheckedAge = Duration(days: 1);
 
   final TypedFirebaseFirestoreDataSource<ShoppingListItem> db;
 
@@ -19,10 +20,10 @@ class ShoppingListItemsRepository
     return db.count(subcollection: "$listId/$itemsSubcollection");
   }
 
-  Future<int> getCheckedItemsCount(String listId) async {
+  Future<int> getUncheckedItemsCount(String listId) async {
     return db.count(
       subcollection: "$listId/$itemsSubcollection",
-      where: DocumentQuery("checked", isEqualTo: true),
+      where: DocumentQuery("checked", isEqualTo: false),
     );
   }
 
