@@ -60,6 +60,42 @@
     "shoppingLists_profile_invite": "Invite a friend",
     "shoppingLists_profile_logout": "Logout",
     "shoppingListItems_add": "Add",
+    "shoppingListItems_add_name": "Item name",
+    "shoppingListItems_add_quantity": "Quantity",
+    "shoppingListItems_add_submit": "Add item",
+    "shoppingListItems_edit_submit": "Update",
+    "shoppingListItems_edit": "Edit {name}",
+    "@shoppingListItems_edit": {
+        "description": "Shopping list items _edit",
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "Groceries"
+            }
+        }
+    },
+    "shoppingListItems_empty_title": "This list is empty.",
+    "shoppingListItems_empty_message": "This shopping list is empty. Add an item to get started.",
+    "shoppingListItems_bought": "Bought {date}",
+    "@shoppingListItems_bought": {
+        "description": "shoppingListItems_bought",
+        "placeholders": {
+            "date": {
+                "type": "String",
+                "example": "today"
+            }
+        }
+    },
+    "shoppingListItems_added": "Added {date}",
+    "@shoppingListItems_added": {
+        "description": "shoppingListItems_added",
+        "placeholders": {
+            "date": {
+                "type": "String",
+                "example": "today"
+            }
+        }
+    },
     "shoppingListItems_notFound": "Oops! We couldn't find that list.",
     "shoppingListItems_notFound_message": "This shopping list doesn't exist or you don't have permission to view it.",
     "global_yes": "Yes",

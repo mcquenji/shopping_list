@@ -50,7 +50,7 @@ class _ShoppingListItemTileState extends State<ShoppingListItemTile> {
         backgroundColor:
             CupertinoColors.systemGroupedBackground.resolveFrom(context),
         navigationBar: CupertinoNavigationBar(
-          middle: "Edit ${widget.item.name}".text,
+          middle: t.shoppingListItems_edit(widget.item.name).text,
         ),
         child: SafeArea(
           child: AddShoppingListItemForm(
@@ -72,7 +72,7 @@ class _ShoppingListItemTileState extends State<ShoppingListItemTile> {
             Modular.to.pop();
             editItem();
           },
-          child: "Edit".text,
+          child: t.shoppingListItems_edit("").text,
         ),
         CupertinoContextMenuAction(
           isDestructiveAction: true,
@@ -117,7 +117,18 @@ class _ShoppingListItemTileState extends State<ShoppingListItemTile> {
                         : CupertinoColors.activeOrange.resolveFrom(context),
                   ),
             additionalInfo: widget.item.quantity.toString().text,
-            subtitle: widget.item.checked ? "Bought".text : "Added".text,
+            // subtitle: widget.item.checked
+            //     ? t
+            //         .shoppingListItems_bought(
+            //             widget.item.checkedAt!.format(context))
+            //         .text
+            //     : t
+            //         .shoppingListItems_added(
+            //           (widget.item.updatedAt ?? widget.item.createdAt).format(
+            //             context,
+            //           ),
+            //         )
+            //         .text,
           ),
         ),
       ),
