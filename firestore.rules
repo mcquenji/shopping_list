@@ -16,16 +16,20 @@ service cloud.firestore {
 
       allow write: if request.auth != null && request.auth.uid == userId;
 
-      allow create: if request.auth != null && request.auth.uid == userId && request.resource.id == userId;
+      allow create: if request.auth != null && request.auth.uid == userId && request.resource.data.id == userId;
     }
 
     match /referrals/{referralId} {
       allow read: if true;
 
-      // only allow write if the referral code is not used and the user is authenticated and the user is not trying to update any other field
-      allow update: if request.auth != null && get(/referrals/$(referralId)).data.referredUser == null && request.resource.data.keys().hasOnly(['referredUser']);
+      function document() {
+        return get(/databases/$(database)/documents/referrals/$(referralId)).data;
+      }
 
-      allow create: if request.auth != null && request.resource.data.creatorId == request.auth.uid && request.resource.id == referralId;
+      // only allow write if the referral code is not used and the user is authenticated and the user is not trying to update any other field
+      allow update: if request.auth != null && document().referredId == null && request.resource.data.id == document().id && request.resource.data.creatorId == document().creatorId && request.resource.data.referredId == request.auth.uid;
+
+      allow create: if request.auth != null && request.resource.data.creatorId == request.auth.uid && request.resource.data.id == referralId;
     }
 
     match /lists/{id} {  
@@ -59,7 +63,5 @@ service cloud.firestore {
         allow delete: if request.auth != null && isOwnerOrMember(request.auth.uid); 
       }
     }
-
-
   }
 }

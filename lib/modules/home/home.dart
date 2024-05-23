@@ -31,6 +31,7 @@ class HomeModule extends Module {
       ShoppingListsRepository.new,
       config: cubitConfig<ShoppingListsRepository>(),
     );
+
     i.addLazySingleton<ShoppingListItemsRepository>(
       ShoppingListItemsRepository.new,
       config: cubitConfig<ShoppingListItemsRepository>(),

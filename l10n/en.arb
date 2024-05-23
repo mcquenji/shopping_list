@@ -24,7 +24,7 @@
     "register_invalidPassword": "Passwords do not match!",
     "register_invalidEmail": "Invalid email address!",
     "register_invalidReferral": "Invalid referral code!",
-    "register_invalidReferral_message": "This app is invite-only. Please ask a friend to send you an invitation or scan their QR code.",
+    "register_invalidReferral_message": "Sorry, this app is invite-only. Please ask a friend that uses the app to send you an invitation.",
     "register_invalidReferral_scan": "Scan QR Code",
     "shoppingLists_title": "Shopping Lists",
     "shoppingLists_empty_title": "No Shopping Lists",
@@ -71,6 +71,7 @@
     },
     "shoppingLists_profile_invite": "Invite a friend",
     "shoppingLists_profile_logout": "Logout",
+    "shoppingListItems_empty": "This list is empty. Add some items to get started",
     "shoppingListItems_add": "Add",
     "shoppingListItems_add_name": "Item name",
     "shoppingListItems_add_quantity": "Quantity",
@@ -114,5 +115,19 @@
     "global_no": "No",
     "global_cancel": "Cancel",
     "global_goBack": "Go Back",
-    "global_back": "Back"
+    "global_back": "Back",
+    "invite_friend_title": "Refer a friend",
+    "invite_friend_message": "If you know someone who would like to use this app, let them scan this QR code so they can join.",
+    "invite_friend_link": "Send link instead",
+    "invite_friend_link_subject": "Manage shopping lists together",
+    "invite_friend_link_message": "Let's manage our shopping lists together! Join me on this app: {link}",
+    "@invite_friend_link_message": {
+        "description": "invite_friend_link_message",
+        "placeholders": {
+            "link": {
+                "type": "String",
+                "example": "https://example.com"
+            }
+        }
+    }
 }

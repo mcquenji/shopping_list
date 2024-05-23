@@ -1,6 +1,7 @@
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_firebase/mcquenji_firebase.dart';
 import 'package:shopping_list/modules/auth/auth.dart';
+import 'package:shopping_list/modules/home/home.dart';
 
 class SignUpRepository extends Repository<AsyncValue<Map<String, Referral>>> {
   final TypedFirebaseFirestoreDataSource<Referral> db;
@@ -29,19 +30,19 @@ class SignUpRepository extends Repository<AsyncValue<Map<String, Referral>>> {
       return false;
     }
 
-    final valid =
+    final invalid =
         referral.referredId != null && referral.referredId!.isNotEmpty;
 
-    if (!valid) {
+    if (invalid) {
       log("Referral found for code: $code, but it is already in use.");
     }
 
-    log("Referral code $code is valid: $valid");
+    log("Referral code $code is valid: ${!invalid}");
 
-    return valid;
+    return !invalid;
   }
 
-  Future<String?> createReferral() async {
+  Future<String?> gnereateReferralCode() async {
     log("Creating referral");
 
     if (!state.hasData) {
@@ -52,6 +53,16 @@ class SignUpRepository extends Repository<AsyncValue<Map<String, Referral>>> {
     if (!auth.isAuthenticated) {
       log("User is not authenticated. Aborting.");
       return null;
+    }
+
+    final existing = state.requireData.values.firstWhereOrNull((element) =>
+        element.creatorId == auth.currentUser!.uid &&
+        element.referredId == null);
+
+    if (existing != null) {
+      log("User already has an unused referral code: ${existing.id}, reusing.");
+
+      return existing.id;
     }
 
     final id = db.newDocumentId();
@@ -133,10 +144,16 @@ class SignUpRepository extends Repository<AsyncValue<Map<String, Referral>>> {
       id = user.user!.uid;
 
       log("Successfully created user with id: $id");
+
+      log("Logging in user...");
     } catch (e, trace) {
       log("Error creating user", e, trace);
       return false;
     }
+
+    log("Setting username: $username");
+    await userRepository.signIn(email, password);
+    await userRepository.setUsermame(username);
 
     referral = referral.copyWith(referredId: id);
 
@@ -150,10 +167,6 @@ class SignUpRepository extends Repository<AsyncValue<Map<String, Referral>>> {
     }
 
     log("Sign up complete.");
-
-    log("Setting username: $username");
-    await userRepository.signIn(email, password);
-    await userRepository.setUsermame(username);
 
     return true;
   }

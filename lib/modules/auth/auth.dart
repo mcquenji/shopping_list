@@ -48,12 +48,16 @@ class AuthModule extends Module {
     );
 
     r.child(
-      "/register",
-      child: (_) => Online(
-        builder: (context) => SignUpScreen(
-          referralCode: r.args.queryParams["code"],
-        ),
-      ),
+      "/register/:code",
+      child: (_) {
+        final code = r.args.params["code"];
+
+        return Online(
+          builder: (context) => SignUpScreen(
+            referralCode: code,
+          ),
+        );
+      },
     );
   }
 }
