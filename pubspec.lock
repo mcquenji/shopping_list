@@ -556,7 +556,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "0736258a476de7460b47310d8e94ed8d895d37fc"
+      resolved-ref: "2ee580905a919c877ea983b80e039de3d205a4d9"
       url: "https://github.com/mcquenji/mcquenji_firebase.git"
     source: git
     version: "0.0.1"
