@@ -1,3 +1,4 @@
+import 'package:cupertino_modal_sheet/cupertino_modal_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
@@ -25,6 +26,26 @@ class _ShoppingListTileState extends State<ShoppingListTile> {
     Modular.to.pop();
   }
 
+  void share() {
+    Modular.to.pop();
+
+    showCupertinoModalSheet(
+      context: context,
+      firstTransition: CupertinoModalSheetRouteTransition.scale,
+      fullscreenDialog: true,
+      builder: (_) => CupertinoPageScaffold(
+        backgroundColor:
+            CupertinoColors.systemGroupedBackground.resolveFrom(context),
+        navigationBar: CupertinoNavigationBar(
+          middle: "Share ${widget.list.name}".text,
+        ),
+        child: SafeArea(
+          child: AddMemberForm(list: widget.list),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final auth = context.read<FirebaseAuthService>();
@@ -35,7 +56,7 @@ class _ShoppingListTileState extends State<ShoppingListTile> {
         if (widget.list.owner == auth.currentUser?.uid)
           CupertinoContextMenuAction(
             trailingIcon: CupertinoIcons.person_crop_circle_badge_plus,
-            onPressed: () {},
+            onPressed: share,
             child: t.shoppingLists_options_share.text,
           ),
         if (widget.list.owner == auth.currentUser?.uid)
