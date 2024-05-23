@@ -30,6 +30,18 @@
     "shoppingLists_empty_title": "No Shopping Lists",
     "shoppingLists_empty_message": "You don't have any shopping lists yet. Add one to get started.",
     "shoppingLists_options_share": "Share",
+    "shoppingLists_options_share_title": "Share {name}",
+    "@shoppingLists_options_share_title": {
+        "description": "shoppingLists_items",
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "Jeff"
+            }
+        }
+    },
+    "shoppingLists_options_share_manage": "Manage members",
+    "shoppingLists_options_share_invite": "Invite users",
     "shoppingLists_options_delete": "Delete",
     "shoppingLists_options_leave": "Leave",
     "shoppingLists_new_btn": "Add",
