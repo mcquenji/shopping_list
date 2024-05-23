@@ -40,7 +40,7 @@ class _ShoppingListItemsScreenState extends State<ShoppingListItemsScreen> {
         backgroundColor:
             CupertinoColors.systemGroupedBackground.resolveFrom(context),
         navigationBar: CupertinoNavigationBar(
-          middle: "Add item".text,
+          middle: t.shoppingListItems_add.text,
         ),
         child: const SafeArea(child: AddShoppingListItemForm()),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:intl/intl.dart';
 
 extension L10nContextExt on BuildContext {
   AppLocalizations get t => AppLocalizations.of(this)!;
@@ -37,4 +38,11 @@ extension CupertinoAcitivityIndicatorExt on CupertinoActivityIndicator {
         color: color,
         key: key,
       );
+}
+
+extension DateTimeExt on DateTime {
+  String format(BuildContext context) => DateFormat(
+        "dd.MM.yy",
+        context.t.localeName,
+      ).format(this);
 }

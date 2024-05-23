@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:shopping_list/modules/home/home.dart';
+import 'package:shopping_list/utils.dart';
 
 class AddShoppingListItemForm extends StatefulWidget {
   const AddShoppingListItemForm({super.key, this.item});
@@ -90,14 +91,14 @@ class _AddShoppingListItemFormState extends State<AddShoppingListItemForm> {
               prefix: const Icon(CupertinoIcons.tag),
               child: CupertinoTextFormFieldRow(
                 controller: nameController,
-                placeholder: "Item name",
+                placeholder: t.shoppingListItems_add_name,
               ),
             ),
             CupertinoFormRow(
               prefix: const Icon(CupertinoIcons.number),
               child: CupertinoTextFormFieldRow(
                 controller: quantityController,
-                placeholder: "Quantity",
+                placeholder: t.shoppingListItems_add_quantity,
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               ),
@@ -108,7 +109,9 @@ class _AddShoppingListItemFormState extends State<AddShoppingListItemForm> {
           onPressed: canSubmit ? submit : null,
           child: isSubmitting
               ? const CupertinoActivityIndicator()
-              : Text(widget.item != null ? "Update" : "Add item"),
+              : widget.item == null
+                  ? t.shoppingListItems_add_submit.text
+                  : t.shoppingListItems_edit_submit.text,
         ).stretch(PaddingHorizontal()),
       ],
     );
