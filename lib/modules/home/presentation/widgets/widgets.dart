@@ -6,3 +6,5 @@ export 'shopping_list_item_count.dart';
 export 'add_shopping_list_item_form.dart';
 export 'shopping_list_items.dart';
 export 'add_member_form.dart';
+export 'invite_friend_form.dart';
+export 'user_profile.dart';

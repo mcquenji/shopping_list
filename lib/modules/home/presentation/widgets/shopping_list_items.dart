@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:shopping_list/modules/home/home.dart';
+import 'package:shopping_list/utils.dart';
 
 class ShoppingListItems extends StatelessWidget {
   const ShoppingListItems({super.key, required this.items, this.search});
@@ -20,7 +21,7 @@ class ShoppingListItems extends StatelessWidget {
             color: CupertinoColors.secondaryLabel.resolveFrom(context),
           ),
           16.vSpacing,
-          'This list is empty. Add some items to get started'.text,
+          context.t.shoppingListItems_empty.text.centered,
         ],
       );
     }

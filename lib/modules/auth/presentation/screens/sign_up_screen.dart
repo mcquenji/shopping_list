@@ -15,6 +15,11 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final referrals = context.watch<SignUpRepository>();
     final users = Modular.get<TypedFirebaseFirestoreDataSource<User>>();
+    final user = context.watch<UserRepository>();
+
+    if (user.state.data != null) {
+      Modular.to.navigate("/");
+    }
 
     return CupertinoPageScaffold(
       backgroundColor: CupertinoDynamicColor.resolve(

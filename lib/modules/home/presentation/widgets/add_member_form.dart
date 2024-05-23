@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_firebase/mcquenji_firebase.dart';
+import 'package:shopping_list/modules/app/app.dart';
 import 'package:shopping_list/modules/auth/auth.dart';
 import 'package:shopping_list/modules/home/home.dart';
 import 'package:shopping_list/utils.dart';
@@ -32,15 +33,23 @@ class _AddMemberFormState extends State<AddMemberForm> {
   Widget build(BuildContext context) {
     final users = context.read<TypedFirebaseFirestoreDataSource<User>>();
     final auth = context.read<FirebaseAuthService>();
+    final lists = context.watch<ShoppingListsRepository>();
 
-    return StreamBuilder<Map<String, User>>(
+    return lists.state.when(
+      data: (lists) => StreamBuilder<Map<String, User>>(
         stream: users.watchAll(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return const CupertinoActivityIndicator();
+            return const Center(child: CupertinoActivityIndicator());
           }
 
-          final members = widget.list.members
+          final list = lists[widget.list.id];
+
+          if (list == null) {
+            return const Center(child: CupertinoActivityIndicator());
+          }
+
+          final members = list.members
               .map(
                 (e) => snapshot.requireData[e]!,
               )
@@ -61,6 +70,7 @@ class _AddMemberFormState extends State<AddMemberForm> {
                     for (final member in members)
                       CupertinoListTile(
                         title: member.name.text,
+                        subtitle: member.email.text,
                         trailing: CupertinoButton(
                           padding: EdgeInsets.zero,
                           child: Icon(
@@ -79,6 +89,7 @@ class _AddMemberFormState extends State<AddMemberForm> {
                   for (final user in inviteableUsers)
                     CupertinoListTile(
                       title: user.name.text,
+                      subtitle: user.email.text,
                       trailing: CupertinoButton(
                         padding: EdgeInsets.zero,
                         child: const Icon(
@@ -91,6 +102,10 @@ class _AddMemberFormState extends State<AddMemberForm> {
               ),
             ],
           );
-        });
+        },
+      ),
+      loading: () => const Center(child: CupertinoActivityIndicator()),
+      error: UnexpectedErrorWidget.handler,
+    );
   }
 }
