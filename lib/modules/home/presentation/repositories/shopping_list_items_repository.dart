@@ -8,7 +8,7 @@ import 'package:shopping_list/modules/home/home.dart';
 class ShoppingListItemsRepository
     extends Repository<AsyncValue<Map<String, ShoppingListItem>>> {
   static const String itemsSubcollection = "items";
-  static const Duration maxCheckedAge = Duration(days: 1);
+  static const Duration maxCheckedAge = Duration(days: 1, hours: 12);
 
   final TypedFirebaseFirestoreDataSource<ShoppingListItem> db;
 
@@ -146,7 +146,7 @@ class ShoppingListItemsRepository
           item.checked ? null : DateTime.now().millisecondsSinceEpoch,
     ));
 
-    log("Item checked: $itemId");
+    log("Item (un)checked: $itemId");
   }
 
   Future<void> loadItems(String listId) async {
@@ -183,6 +183,34 @@ class ShoppingListItemsRepository
       log("Error loading items for list: $listId", e, stack);
 
       emit(AsyncValue.error(e, stack));
+    }
+
+    log("Cleaning up old checked items (older than $maxCheckedAge) for list: $listId");
+
+    try {
+      final items =
+          await db.readAll(subcollection: "$listId/$itemsSubcollection");
+
+      int deleted = 0;
+
+      for (final item in items.values) {
+        if (!item.checked) continue;
+        if (item.checkedAt == null) continue;
+
+        final tooOld =
+            DateTime.now().difference(item.checkedAt!).abs() > maxCheckedAge;
+
+        if (!tooOld) continue;
+
+        log("Deleting ${item.name}#${item.id} (checked at ${item.checkedAt})");
+        await db.delete("$listId/$itemsSubcollection/${item.id}");
+
+        deleted++;
+      }
+
+      log("Purged $deleted items");
+    } catch (e, stack) {
+      log("Error cleaning up old checked items for list: $listId", e, stack);
     }
   }
 
