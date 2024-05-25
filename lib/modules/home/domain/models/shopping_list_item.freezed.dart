@@ -27,6 +27,7 @@ mixin _$ShoppingListItem {
   bool get checked => throw _privateConstructorUsedError;
   int? get checkedAtTimestamp => throw _privateConstructorUsedError;
   int? get updatedAtTimestamp => throw _privateConstructorUsedError;
+  String? get buyerId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +48,8 @@ abstract class $ShoppingListItemCopyWith<$Res> {
       int createdAtTimestamp,
       bool checked,
       int? checkedAtTimestamp,
-      int? updatedAtTimestamp});
+      int? updatedAtTimestamp,
+      String? buyerId});
 }
 
 /// @nodoc
@@ -70,6 +72,7 @@ class _$ShoppingListItemCopyWithImpl<$Res, $Val extends ShoppingListItem>
     Object? checked = null,
     Object? checkedAtTimestamp = freezed,
     Object? updatedAtTimestamp = freezed,
+    Object? buyerId = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -100,6 +103,10 @@ class _$ShoppingListItemCopyWithImpl<$Res, $Val extends ShoppingListItem>
           ? _value.updatedAtTimestamp
           : updatedAtTimestamp // ignore: cast_nullable_to_non_nullable
               as int?,
+      buyerId: freezed == buyerId
+          ? _value.buyerId
+          : buyerId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -119,7 +126,8 @@ abstract class _$$ShoppingListItemImplCopyWith<$Res>
       int createdAtTimestamp,
       bool checked,
       int? checkedAtTimestamp,
-      int? updatedAtTimestamp});
+      int? updatedAtTimestamp,
+      String? buyerId});
 }
 
 /// @nodoc
@@ -140,6 +148,7 @@ class __$$ShoppingListItemImplCopyWithImpl<$Res>
     Object? checked = null,
     Object? checkedAtTimestamp = freezed,
     Object? updatedAtTimestamp = freezed,
+    Object? buyerId = freezed,
   }) {
     return _then(_$ShoppingListItemImpl(
       id: null == id
@@ -170,6 +179,10 @@ class __$$ShoppingListItemImplCopyWithImpl<$Res>
           ? _value.updatedAtTimestamp
           : updatedAtTimestamp // ignore: cast_nullable_to_non_nullable
               as int?,
+      buyerId: freezed == buyerId
+          ? _value.buyerId
+          : buyerId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -184,7 +197,8 @@ class _$ShoppingListItemImpl extends _ShoppingListItem {
       required this.createdAtTimestamp,
       this.checked = false,
       this.checkedAtTimestamp,
-      this.updatedAtTimestamp})
+      this.updatedAtTimestamp,
+      this.buyerId})
       : super._();
 
   factory _$ShoppingListItemImpl.fromJson(Map<String, dynamic> json) =>
@@ -205,10 +219,12 @@ class _$ShoppingListItemImpl extends _ShoppingListItem {
   final int? checkedAtTimestamp;
   @override
   final int? updatedAtTimestamp;
+  @override
+  final String? buyerId;
 
   @override
   String toString() {
-    return 'ShoppingListItem(id: $id, name: $name, quantity: $quantity, createdAtTimestamp: $createdAtTimestamp, checked: $checked, checkedAtTimestamp: $checkedAtTimestamp, updatedAtTimestamp: $updatedAtTimestamp)';
+    return 'ShoppingListItem(id: $id, name: $name, quantity: $quantity, createdAtTimestamp: $createdAtTimestamp, checked: $checked, checkedAtTimestamp: $checkedAtTimestamp, updatedAtTimestamp: $updatedAtTimestamp, buyerId: $buyerId)';
   }
 
   @override
@@ -226,13 +242,22 @@ class _$ShoppingListItemImpl extends _ShoppingListItem {
             (identical(other.checkedAtTimestamp, checkedAtTimestamp) ||
                 other.checkedAtTimestamp == checkedAtTimestamp) &&
             (identical(other.updatedAtTimestamp, updatedAtTimestamp) ||
-                other.updatedAtTimestamp == updatedAtTimestamp));
+                other.updatedAtTimestamp == updatedAtTimestamp) &&
+            (identical(other.buyerId, buyerId) || other.buyerId == buyerId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, quantity,
-      createdAtTimestamp, checked, checkedAtTimestamp, updatedAtTimestamp);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      quantity,
+      createdAtTimestamp,
+      checked,
+      checkedAtTimestamp,
+      updatedAtTimestamp,
+      buyerId);
 
   @JsonKey(ignore: true)
   @override
@@ -257,7 +282,8 @@ abstract class _ShoppingListItem extends ShoppingListItem {
       required final int createdAtTimestamp,
       final bool checked,
       final int? checkedAtTimestamp,
-      final int? updatedAtTimestamp}) = _$ShoppingListItemImpl;
+      final int? updatedAtTimestamp,
+      final String? buyerId}) = _$ShoppingListItemImpl;
   _ShoppingListItem._() : super._();
 
   factory _ShoppingListItem.fromJson(Map<String, dynamic> json) =
@@ -277,6 +303,8 @@ abstract class _ShoppingListItem extends ShoppingListItem {
   int? get checkedAtTimestamp;
   @override
   int? get updatedAtTimestamp;
+  @override
+  String? get buyerId;
   @override
   @JsonKey(ignore: true)
   _$$ShoppingListItemImplCopyWith<_$ShoppingListItemImpl> get copyWith =>

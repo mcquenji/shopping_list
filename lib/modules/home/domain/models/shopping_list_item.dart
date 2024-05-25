@@ -15,6 +15,7 @@ class ShoppingListItem with _$ShoppingListItem {
     @Default(false) bool checked,
     int? checkedAtTimestamp,
     int? updatedAtTimestamp,
+    String? buyerId,
   }) = _ShoppingListItem;
 
   DateTime get createdAt => DateTime.fromMillisecondsSinceEpoch(

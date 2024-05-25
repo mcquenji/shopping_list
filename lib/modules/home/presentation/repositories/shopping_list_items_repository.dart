@@ -11,8 +11,9 @@ class ShoppingListItemsRepository
   static const Duration maxCheckedAge = Duration(hours: 12);
 
   final TypedFirebaseFirestoreDataSource<ShoppingListItem> db;
+  final FirebaseAuthService auth;
 
-  ShoppingListItemsRepository(this.db) : super(AsyncValue.loading());
+  ShoppingListItemsRepository(this.db, this.auth) : super(AsyncValue.loading());
 
   (String, StreamSubscription<Map<String, ShoppingListItem>>)? _watchedItems;
 
@@ -140,11 +141,14 @@ class ShoppingListItemsRepository
       return;
     }
 
-    await _writeItem(item.copyWith(
-      checked: !item.checked,
-      checkedAtTimestamp:
-          item.checked ? null : DateTime.now().millisecondsSinceEpoch,
-    ));
+    await _writeItem(
+      item.copyWith(
+        checked: !item.checked,
+        buyerId: item.checked ? null : auth.currentUser?.uid,
+        checkedAtTimestamp:
+            item.checked ? null : DateTime.now().millisecondsSinceEpoch,
+      ),
+    );
 
     log("Item (un)checked: $itemId");
   }

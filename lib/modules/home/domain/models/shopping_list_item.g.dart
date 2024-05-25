@@ -16,6 +16,7 @@ _$ShoppingListItemImpl _$$ShoppingListItemImplFromJson(
       checked: json['checked'] as bool? ?? false,
       checkedAtTimestamp: (json['checkedAtTimestamp'] as num?)?.toInt(),
       updatedAtTimestamp: (json['updatedAtTimestamp'] as num?)?.toInt(),
+      buyerId: json['buyerId'] as String?,
     );
 
 Map<String, dynamic> _$$ShoppingListItemImplToJson(
@@ -28,4 +29,5 @@ Map<String, dynamic> _$$ShoppingListItemImplToJson(
       'checked': instance.checked,
       'checkedAtTimestamp': instance.checkedAtTimestamp,
       'updatedAtTimestamp': instance.updatedAtTimestamp,
+      'buyerId': instance.buyerId,
     };
