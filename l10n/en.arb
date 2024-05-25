@@ -89,23 +89,13 @@
     },
     "shoppingListItems_empty_title": "This list is empty.",
     "shoppingListItems_empty_message": "This shopping list is empty. Add an item to get started.",
-    "shoppingListItems_bought": "Bought {date}",
-    "@shoppingListItems_bought": {
+    "shoppingListItems_boughtBy": "Bought by {name}",
+    "@shoppingListItems_boughtBy": {
         "description": "shoppingListItems_bought",
         "placeholders": {
-            "date": {
+            "name": {
                 "type": "String",
-                "example": "today"
-            }
-        }
-    },
-    "shoppingListItems_added": "Added {date}",
-    "@shoppingListItems_added": {
-        "description": "shoppingListItems_added",
-        "placeholders": {
-            "date": {
-                "type": "String",
-                "example": "today"
+                "example": "Jeff"
             }
         }
     },
@@ -133,5 +123,20 @@
     "update_title": "Update Available",
     "update_message": "A new version of the app is available. Update now to get the latest features and improvements.",
     "update_btn": "Update",
-    "update_later": "Later"
+    "update_later": "Later",
+    "resetPassword_title": "Reset Password",
+    "resetPassword_email": "Email",
+    "resetPassword_email_message": "Enter the email address associated with your account to continue.",
+    "resetPassword_email_send": "Send email",
+    "resetPassword_email_sent": "Reset email sent",
+    "resetPassword_email_sent_message": "We've sent you an email with instructions to reset your password. Please check your inbox.",
+    "resetPassword_email_sent_message_hint": "If you don't receive an email within a few minutes, make sure to check your spam folder.",
+    "resetPassword_new_title": "Seems like you forgot your password",
+    "resetPassword_new": "New Password",
+    "resetPassword_repeat": "Repeat Password",
+    "resetPassword_submit": "Reset",
+    "validation_password_tooShort": "Password must be at least 6 characters long.",
+    "validation_password_noMatch": "Passwords do not match.",
+    "validation_email_invalid": "Invalid email address.",
+    "showPassword": "Show password"
 }

@@ -7,9 +7,9 @@ import 'package:shopping_list/modules/auth/auth.dart';
 import 'package:shopping_list/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key, this.referralCode});
+  const SignUpScreen({super.key, required this.referralCode});
 
-  final String? referralCode;
+  final String referralCode;
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +42,12 @@ class SignUpScreen extends StatelessWidget {
 
               if (snapshot.data!.isEmpty) return const SignUpForm();
 
-              final valid = referrals.validateReferralCode(referralCode ?? "");
+              final valid = referrals.validateReferralCode(referralCode);
 
               if (!valid) return const InvalidReferralCodeWidget();
 
               return SignUpForm(
-                referralCode: referralCode!,
+                referralCode: referralCode,
               );
             },
           ),

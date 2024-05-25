@@ -49,15 +49,20 @@ class AuthModule extends Module {
 
     r.child(
       "/register/:code",
-      child: (_) {
-        final code = r.args.params["code"];
+      child: (_) => Online(
+        builder: (context) => SignUpScreen(
+          referralCode: r.args.params["code"],
+        ),
+      ),
+    );
 
-        return Online(
-          builder: (context) => SignUpScreen(
-            referralCode: code,
-          ),
-        );
-      },
+    r.child(
+      "/reset-password/:code",
+      child: (_) => Online(
+        builder: (_) => ResetPasswordScreen(
+          code: r.args.params["code"],
+        ),
+      ),
     );
   }
 }

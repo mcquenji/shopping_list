@@ -45,6 +45,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   bool isSubmitting = false;
   bool error = false;
+  bool showPassword = false;
 
   Future<void> register() async {
     if (!isFormValid) return;
@@ -127,7 +128,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   controller: passwordController,
                   placeholder: context.t.register_password,
                   keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
+                  obscureText: !showPassword,
                   autofillHints: const [
                     AutofillHints.newPassword,
                     AutofillHints.password,
@@ -143,8 +144,15 @@ class _SignUpFormState extends State<SignUpForm> {
                   controller: repeatPasswordController,
                   placeholder: context.t.register_repeatPassword,
                   keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
+                  obscureText: !showPassword,
                   autofillHints: const [AutofillHints.password],
+                ),
+              ),
+              CupertinoFormRow(
+                prefix: t.showPassword.text,
+                child: CupertinoSwitch(
+                  value: showPassword,
+                  onChanged: (value) => setState(() => showPassword = value),
                 ),
               ),
             ],

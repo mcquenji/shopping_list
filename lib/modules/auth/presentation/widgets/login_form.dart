@@ -17,6 +17,7 @@ class _LoginFormState extends State<LoginForm> {
 
   bool invalidLogin = false;
   bool loggingIn = false;
+  bool showPassword = false;
 
   Future<void> login() async {
     setState(() {
@@ -77,7 +78,15 @@ class _LoginFormState extends State<LoginForm> {
                       autofillHints: const [
                         AutofillHints.password,
                       ],
-                      obscureText: true,
+                      obscureText: !showPassword,
+                    ),
+                  ),
+                  CupertinoFormRow(
+                    prefix: t.showPassword.text,
+                    child: CupertinoSwitch(
+                      value: showPassword,
+                      onChanged: (value) =>
+                          setState(() => showPassword = value),
                     ),
                   ),
                 ],
@@ -87,7 +96,9 @@ class _LoginFormState extends State<LoginForm> {
           Column(
             children: [
               CupertinoButton(
-                onPressed: () {},
+                onPressed: () {
+                  Modular.to.pushNamed("/auth/reset-password/");
+                },
                 child: t.login_forgot_password.text,
               ),
               CupertinoButton.filled(
