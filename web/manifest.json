@@ -1,11 +1,11 @@
 {
-    "name": "shopping_list",
-    "short_name": "shopping_list",
+    "name": "Shopping List",
+    "short_name": "Shopping List",
     "start_url": ".",
-    "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "display": "fullscreen",
+    "background_color": "rgba(0, 0, 0, 0)",
+    "theme_color": "rgba(0, 0, 0, 0)",
+    "description": "Manage and share your shopping lists with your family and friends.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
