@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/mcquenji/shopping_list/compare/v1.1.0...v1.2.0) (2024-05-25)
+
+
+### Features
+
+* check for updates ([d67a2e9](https://github.com/mcquenji/shopping_list/commit/d67a2e9d96d335514b5fec2c903dfb6b912a4c6e))
+* support offline ([0841a2e](https://github.com/mcquenji/shopping_list/commit/0841a2ef4b4f328aa173e0ca19edd28ab87939e4))
+
+
+### Bug Fixes
+
+* add autofill for login and sign up ([9c07206](https://github.com/mcquenji/shopping_list/commit/9c0720621bc6841d0d48211dedf2cd630c8cd8db))
+* **branding:** add description ([33a55ed](https://github.com/mcquenji/shopping_list/commit/33a55edd774f7e6afeab5206b824e9b28a87531f))
+* **branding:** reduce icon size ([c041b29](https://github.com/mcquenji/shopping_list/commit/c041b293a182a5ce725f21ecdd7852dc88aee706))
+
 ## 1.1.0 (2024-05-23)
 
 
