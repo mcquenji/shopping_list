@@ -45,54 +45,61 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        Column(
-          children: [
-            CupertinoFormSection.insetGrouped(
-              header: context.t.login_subtitle.text,
-              children: [
-                CupertinoFormRow(
-                  prefix: const Icon(CupertinoIcons.mail),
-                  error: invalidLogin ? context.t.login_invalid.text : null,
-                  child: CupertinoTextFormFieldRow(
-                    controller: emailController,
-                    placeholder: context.t.login_email,
-                    keyboardType: TextInputType.emailAddress,
-                    autofillHints: const [AutofillHints.email],
+    return AutofillGroup(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Column(
+            children: [
+              CupertinoFormSection.insetGrouped(
+                header: context.t.login_subtitle.text,
+                children: [
+                  CupertinoFormRow(
+                    prefix: const Icon(CupertinoIcons.mail),
+                    error: invalidLogin ? context.t.login_invalid.text : null,
+                    child: CupertinoTextFormFieldRow(
+                      controller: emailController,
+                      placeholder: context.t.login_email,
+                      keyboardType: TextInputType.emailAddress,
+                      autofillHints: const [
+                        AutofillHints.username,
+                        AutofillHints.email,
+                      ],
+                    ),
                   ),
-                ),
-                CupertinoFormRow(
-                  prefix: const Icon(CupertinoIcons.lock),
-                  error: invalidLogin ? context.t.login_invalid.text : null,
-                  child: CupertinoTextFormFieldRow(
-                    controller: passwordController,
-                    placeholder: context.t.login_password,
-                    autofillHints: const [AutofillHints.password],
-                    obscureText: true,
+                  CupertinoFormRow(
+                    prefix: const Icon(CupertinoIcons.lock),
+                    error: invalidLogin ? context.t.login_invalid.text : null,
+                    child: CupertinoTextFormFieldRow(
+                      controller: passwordController,
+                      placeholder: context.t.login_password,
+                      autofillHints: const [
+                        AutofillHints.password,
+                      ],
+                      obscureText: true,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            CupertinoButton(
-              onPressed: () {},
-              child: t.login_forgot_password.text,
-            ),
-            CupertinoButton.filled(
-              onPressed: loggingIn ? null : login,
-              child: loggingIn
-                  ? const CupertinoActivityIndicator()
-                  : t.login_submit.text,
-            ).stretch(PaddingHorizontal()),
-          ],
-        ),
-      ],
+                ],
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              CupertinoButton(
+                onPressed: () {},
+                child: t.login_forgot_password.text,
+              ),
+              CupertinoButton.filled(
+                onPressed: loggingIn ? null : login,
+                child: loggingIn
+                    ? const CupertinoActivityIndicator()
+                    : t.login_submit.text,
+              ).stretch(PaddingHorizontal().Bottom(40)),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
