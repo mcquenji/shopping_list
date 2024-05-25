@@ -1,32 +1,33 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:mcquenji_firebase/mcquenji_firebase.dart';
 import 'package:shopping_list/utils.dart';
 
-class ResetPasswordNewForm extends StatefulWidget {
-  const ResetPasswordNewForm({super.key, required this.code});
+class NewPasswordForm extends StatefulWidget {
+  const NewPasswordForm({super.key, required this.code});
 
   final String code;
 
   @override
-  State<ResetPasswordNewForm> createState() => _ResetPasswordNewFormState();
+  State<NewPasswordForm> createState() => _NewPasswordFormState();
 
   static String? newPasswordValidator(
       BuildContext context, String? value, String other) {
-    if (value == null || value.trim().isEmpty || other.trim().isEmpty) {
-      return context.t.validation_password_tooShort;
-    }
-
     if (value != other) {
       return context.t.validation_password_noMatch;
+    }
+
+    if (value == null || value.trim().length < 6 || other.trim().length < 6) {
+      return context.t.validation_password_tooShort;
     }
 
     return null;
   }
 }
 
-class _ResetPasswordNewFormState extends State<ResetPasswordNewForm> {
+class _NewPasswordFormState extends State<NewPasswordForm> {
   final passwordController = TextEditingController();
   final repeatPasswordController = TextEditingController();
 
@@ -36,7 +37,7 @@ class _ResetPasswordNewFormState extends State<ResetPasswordNewForm> {
   Future<void> submit() async {
     if (submitting) return;
 
-    if (ResetPasswordNewForm.newPasswordValidator(
+    if (NewPasswordForm.newPasswordValidator(
           context,
           passwordController.text,
           repeatPasswordController.text,
@@ -51,10 +52,18 @@ class _ResetPasswordNewFormState extends State<ResetPasswordNewForm> {
 
     final auth = context.read<FirebaseAuthService>();
 
-    await auth.confirmPasswordReset(
-      code: widget.code,
-      newPassword: passwordController.text.trim(),
-    );
+    if (kReleaseMode) {
+      await auth.confirmPasswordReset(
+        code: widget.code,
+        newPassword: passwordController.text.trim(),
+      );
+    }
+
+    setState(() {
+      submitting = false;
+    });
+
+    Modular.to.navigate('/auth/');
   }
 
   @override
@@ -72,7 +81,7 @@ class _ResetPasswordNewFormState extends State<ResetPasswordNewForm> {
                 placeholder: context.t.resetPassword_new,
                 obscureText: !showPassword,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => ResetPasswordNewForm.newPasswordValidator(
+                validator: (value) => NewPasswordForm.newPasswordValidator(
                   context,
                   value,
                   repeatPasswordController.text,
@@ -86,7 +95,7 @@ class _ResetPasswordNewFormState extends State<ResetPasswordNewForm> {
                 placeholder: context.t.resetPassword_repeat,
                 obscureText: !showPassword,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => ResetPasswordNewForm.newPasswordValidator(
+                validator: (value) => NewPasswordForm.newPasswordValidator(
                   context,
                   value,
                   passwordController.text,

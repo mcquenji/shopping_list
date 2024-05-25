@@ -27,7 +27,7 @@ class ResetPasswordScreen extends StatelessWidget {
           child: SafeArea(
             child: code.isEmpty || (snapshot.hasError && kReleaseMode)
                 ? const ResetPasswordEmailForm()
-                : ResetPasswordNewForm(code: code),
+                : NewPasswordForm(code: code),
           ),
         );
       },
