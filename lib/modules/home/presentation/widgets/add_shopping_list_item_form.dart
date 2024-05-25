@@ -19,8 +19,6 @@ class _AddShoppingListItemFormState extends State<AddShoppingListItemForm> {
   final nameController = TextEditingController();
   final quantityController = TextEditingController();
 
-  bool isSubmitting = false;
-
   bool get canSubmit => isNameValid && isQuantityValid;
   bool get isNameValid => nameController.text.isNotEmpty;
   bool get isQuantityValid {
@@ -53,9 +51,7 @@ class _AddShoppingListItemFormState extends State<AddShoppingListItemForm> {
   Future<void> submit() async {
     if (!canSubmit) return;
 
-    setState(() {
-      isSubmitting = true;
-    });
+    Modular.to.pop();
 
     final items = context.read<ShoppingListItemsRepository>();
 
@@ -71,12 +67,6 @@ class _AddShoppingListItemFormState extends State<AddShoppingListItemForm> {
         int.parse(quantityController.text),
       );
     }
-
-    setState(() {
-      isSubmitting = false;
-    });
-
-    Modular.to.pop();
   }
 
   @override
@@ -107,12 +97,10 @@ class _AddShoppingListItemFormState extends State<AddShoppingListItemForm> {
         ),
         CupertinoButton.filled(
           onPressed: canSubmit ? submit : null,
-          child: isSubmitting
-              ? const CupertinoActivityIndicator()
-              : widget.item == null
-                  ? t.shoppingListItems_add_submit.text
-                  : t.shoppingListItems_edit_submit.text,
-        ).stretch(PaddingHorizontal()),
+          child: widget.item == null
+              ? t.shoppingListItems_add_submit.text
+              : t.shoppingListItems_edit_submit.text,
+        ).stretch(PaddingHorizontal().Bottom(40)),
       ],
     );
   }

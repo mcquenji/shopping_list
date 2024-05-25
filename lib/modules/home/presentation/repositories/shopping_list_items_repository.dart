@@ -150,6 +150,8 @@ class ShoppingListItemsRepository
   }
 
   Future<void> loadItems(String listId) async {
+    if (_watchedItems?.$1 != listId) emit(AsyncValue.loading());
+
     try {
       log("Loading items for list: $listId");
 
@@ -161,22 +163,17 @@ class ShoppingListItemsRepository
       if (_watchedItems != null) {
         log("Cancelling previous watch on list: ${_watchedItems!.$1}");
 
-        _watchedItems!.$2.cancel();
+        await unloadItems();
       }
 
       _watchedItems = (
         listId,
-        db
-            .watchAll(subcollection: "$listId/$itemsSubcollection")
-            .asBroadcastStream()
-            .listen(
+        db.watchAll(subcollection: "$listId/$itemsSubcollection").listen(
           (event) {
             emit(AsyncValue.data(event));
           },
         )
       );
-
-      emit(AsyncValue.data({}));
 
       log("Now watching items for list: $listId");
     } catch (e, stack) {
@@ -223,9 +220,13 @@ class ShoppingListItemsRepository
       await _watchedItems!.$2.cancel();
 
       _watchedItems = null;
+
+      emit(AsyncValue.loading());
     }
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    _watchedItems?.$2.cancel();
+  }
 }

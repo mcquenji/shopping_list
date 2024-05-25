@@ -25,24 +25,14 @@ class _CreateShoppingListFormState extends State<CreateShoppingListForm> {
     super.initState();
   }
 
-  bool submitting = false;
-
   Future<void> submit() async {
     if (!canSubmit) return;
 
-    setState(() {
-      submitting = true;
-    });
+    Modular.to.pop();
 
     final lists = context.read<ShoppingListsRepository>();
 
     await lists.createNewList(nameController.text.trim());
-
-    setState(() {
-      submitting = false;
-    });
-
-    Modular.to.pop();
   }
 
   @override
@@ -64,11 +54,9 @@ class _CreateShoppingListFormState extends State<CreateShoppingListForm> {
             ],
           ),
           CupertinoButton.filled(
-            onPressed: canSubmit && !submitting ? submit : null,
-            child: submitting
-                ? const CupertinoActivityIndicator()
-                : t.shoppingLists_new_submit.text,
-          ).stretch(PaddingHorizontal()),
+            onPressed: canSubmit ? submit : null,
+            child: t.shoppingLists_new_submit.text,
+          ).stretch(PaddingHorizontal().Bottom(40)),
         ],
       ),
     );

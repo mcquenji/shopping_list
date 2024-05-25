@@ -80,10 +80,21 @@ class UserRepository extends Repository<AsyncValue<User?>> {
   }
 
   Future<void> setUsermame(String name) async {
-    if (name.isEmpty) return emit(AsyncValue.error('Name cannot be empty.'));
+    log('Setting username...');
 
-    if (!state.hasData) return;
-    if (state.data == null) return;
+    if (name.isEmpty) {
+      log('Name is empty. Aborting...');
+      return emit(AsyncValue.error('Name cannot be empty.'));
+    }
+
+    if (!state.hasData) {
+      log('No user loaded. Aborting...');
+      return;
+    }
+    if (state.data == null) {
+      log('No user loaded. Aborting...');
+      return;
+    }
 
     final guard = await AsyncValue.guard(() async {
       final user = state.data!.copyWith(name: name);
@@ -94,6 +105,8 @@ class UserRepository extends Repository<AsyncValue<User?>> {
     });
 
     emit(guard);
+
+    log('Username for user ${state.data!.id} set to $name.');
   }
 
   Future<void> requestPasswordReset(String email) async {

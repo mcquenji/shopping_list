@@ -3,7 +3,7 @@ description: "Synced shopping list PWA."
 
 publish_to: "none"
 
-version: 1.0.0+1
+version: 1.1.4
 
 environment:
   sdk: ">=3.3.4 <4.0.0"
@@ -31,6 +31,7 @@ dependencies:
   mcquenji_firebase:
     git:
       url: https://github.com/mcquenji/mcquenji_firebase.git
+  pwa_update_listener: ^0.1.0
   qr_flutter: ^4.1.0
   share_plus: ^9.0.0
   super_cupertino_navigation_bar: ^2.1.2
@@ -50,6 +51,8 @@ dependency_overrides:
     git:
       url: https://github.com/RuslanTsitser/flutter_device_preview
       path: device_preview
+  mcquenji_firebase:
+    path: ../mcquenji_firebase
 
 flutter:
   uses-material-design: true

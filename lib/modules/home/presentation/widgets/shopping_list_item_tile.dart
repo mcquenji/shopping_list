@@ -15,24 +15,10 @@ class ShoppingListItemTile extends StatefulWidget {
 }
 
 class _ShoppingListItemTileState extends State<ShoppingListItemTile> {
-  bool checking = false;
-
   Future<void> toggleChecked() async {
-    if (checking) return;
-
-    setState(() {
-      checking = true;
-    });
-
     final items = context.read<ShoppingListItemsRepository>();
 
     await items.checkItem(widget.item.id);
-
-    if (!mounted) return;
-
-    setState(() {
-      checking = false;
-    });
   }
 
   Future<void> delete() async {
@@ -106,29 +92,15 @@ class _ShoppingListItemTileState extends State<ShoppingListItemTile> {
                 child: widget.item.name.text.left,
               ),
             ),
-            leading: checking
-                ? const CupertinoActivityIndicator()
-                : Icon(
-                    widget.item.checked
-                        ? CupertinoIcons.check_mark_circled_solid
-                        : CupertinoIcons.circle,
-                    color: widget.item.checked
-                        ? CupertinoColors.systemGreen.resolveFrom(context)
-                        : CupertinoColors.activeOrange.resolveFrom(context),
-                  ),
+            leading: Icon(
+              widget.item.checked
+                  ? CupertinoIcons.check_mark_circled_solid
+                  : CupertinoIcons.circle,
+              color: widget.item.checked
+                  ? CupertinoColors.systemGreen.resolveFrom(context)
+                  : CupertinoColors.activeOrange.resolveFrom(context),
+            ),
             additionalInfo: widget.item.quantity.toString().text,
-            // subtitle: widget.item.checked
-            //     ? t
-            //         .shoppingListItems_bought(
-            //             widget.item.checkedAt!.format(context))
-            //         .text
-            //     : t
-            //         .shoppingListItems_added(
-            //           (widget.item.updatedAt ?? widget.item.createdAt).format(
-            //             context,
-            //           ),
-            //         )
-            //         .text,
           ),
         ),
       ),
