@@ -2,6 +2,12 @@
 
 Shopping list PWA built with Flutter using Cupertino design.
 
+## Deployment
+
+### Password reset
+
+For password reset to work, you have to modify the `Password reset` template in Firebase Console under `Authentication` -> `Templates` -> `Password reset`. Make sure the url is set to `https://[your.domain.com]/#/auth/reset-password/code`.
+
 ## Contributing
 
 1. Fork it!
