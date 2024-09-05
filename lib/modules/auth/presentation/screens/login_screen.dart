@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
     return CupertinoPageScaffold(
       backgroundColor: CupertinoColors.systemGroupedBackground,
       navigationBar: CupertinoNavigationBar(
-        leading: context.t.login_title.text,
+        middle: context.t.login_title.text,
       ),
       child: repo.state.when(
         data: (user) {

@@ -27,7 +27,9 @@ class _ResetPasswordEmailFormState extends State<ResetPasswordEmailForm> {
     final auth = context.read<FirebaseAuthService>();
 
     if (kReleaseMode) {
-      await auth.sendPasswordResetEmail(email: emailController.text.trim());
+      try {
+        await auth.sendPasswordResetEmail(email: emailController.text.trim());
+      } finally {}
     }
 
     setState(() {

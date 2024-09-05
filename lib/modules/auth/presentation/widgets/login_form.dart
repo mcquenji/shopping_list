@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mcquenji_core/mcquenji_core.dart';
 import 'package:shopping_list/modules/auth/auth.dart';
@@ -20,6 +21,8 @@ class _LoginFormState extends State<LoginForm> {
   bool showPassword = false;
 
   Future<void> login() async {
+    TextInput.finishAutofillContext();
+
     setState(() {
       loggingIn = true;
       invalidLogin = false;
@@ -85,8 +88,9 @@ class _LoginFormState extends State<LoginForm> {
                     prefix: t.showPassword.text,
                     child: CupertinoSwitch(
                       value: showPassword,
-                      onChanged: (value) =>
-                          setState(() => showPassword = value),
+                      onChanged: (value) {
+                        setState(() => showPassword = value);
+                      },
                     ),
                   ),
                 ],

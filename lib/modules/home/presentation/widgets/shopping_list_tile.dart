@@ -51,7 +51,6 @@ class _ShoppingListTileState extends State<ShoppingListTile> {
     final auth = context.read<FirebaseAuthService>();
 
     return CupertinoContextMenu.builder(
-      enableHapticFeedback: true,
       actions: [
         if (widget.list.owner == auth.currentUser?.uid)
           CupertinoContextMenuAction(

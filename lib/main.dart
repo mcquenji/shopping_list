@@ -17,6 +17,7 @@ import 'package:shopping_list/modules/app/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:shopping_list/utils.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 void main() async {
   Logger.root.level = Level.ALL;
@@ -32,11 +33,6 @@ void main() async {
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-    ),
-  );
 
   assertFirebaseConfigured();
 
@@ -55,6 +51,8 @@ void main() async {
     persistenceEnabled: true,
     cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
   );
+
+  setPathUrlStrategy();
 
   runApp(
     ModularApp(

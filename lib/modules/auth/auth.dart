@@ -57,11 +57,13 @@ class AuthModule extends Module {
     );
 
     r.child(
-      "/reset-password/:code",
+      "/reset-password/?:oobCode",
       child: (_) => Online(
-        builder: (_) => ResetPasswordScreen(
-          code: r.args.params["code"],
-        ),
+        builder: (_) {
+          return ResetPasswordScreen(
+            code: r.args.queryParams["oobCode"] ?? "",
+          );
+        },
       ),
     );
   }

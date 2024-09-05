@@ -138,5 +138,15 @@
     "validation_password_tooShort": "Password must be at least 6 characters long.",
     "validation_password_noMatch": "Passwords do not match.",
     "validation_email_invalid": "Invalid email address.",
-    "showPassword": "Show password"
+    "showPassword": "Show password",
+    "version": "App Version: {version}",
+    "@version": {
+        "description": "version",
+        "placeholders": {
+            "version": {
+                "type": "String",
+                "example": "1.0.0"
+            }
+        }
+    }
 }

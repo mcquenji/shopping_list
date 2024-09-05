@@ -27,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
         context,
       ),
       navigationBar: CupertinoNavigationBar(
-        leading: context.t.register_title.text,
+        middle: context.t.register_title.text,
       ),
       child: SafeArea(
         child: referrals.state.when(
